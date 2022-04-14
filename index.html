@@ -36,16 +36,8 @@
       <div class="container" id="container">
         <!--each block-->
         <div class="addblock" id="addblock">
-          <button
-            class="delSet"
-            id="delSet"
-            style="position: left; position: top"
-          ></button>
-          <button
-            class="editSet"
-            id="editSet"
-            style="position: rigth; position: top"
-          ></button>
+          <button class="delSet" id="delSet"></button>
+          <button class="editSet" id="editSet"></button>
           <p class="textInTextBox">IELTS</p>
           <button class="learningSet" id="learningSet">Learning</button>
           <button class="practiceSet" id="practiceSet">Practice</button>
@@ -54,15 +46,30 @@
         <div class="addblock" id="addblock">
           <button class="delSet" id="delSet"></button>
           <button class="editSet" id="editSet"></button>
-          <p class="textInTextBox">Me</p>
+          <p class="textInTextBox">Meowmeowmeowmeow</p>
+          <button class="learningSet" id="learningSet">Learning</button>
+          <button class="practiceSet" id="practiceSet">Practice</button>
+        </div>
+        <!--example 2-->
+        <div class="addblock" id="addblock">
+          <button class="delSet" id="delSet"></button>
+          <button class="editSet" id="editSet"></button>
+          <p class="textInTextBox">HelloFrom</p>
           <button class="learningSet" id="learningSet">Learning</button>
           <button class="practiceSet" id="practiceSet">Practice</button>
         </div>
         <!--Add new Block-->
         <div class="addblock" id="newblock">
           <p class="textInTextBox">NEW</p>
-          <input type="text" id="name-of-set" placeholder="Type here ..." />
-          <div class="btn-add-new-block">+</div>
+          <br />
+          <br />
+          <input
+            type="text"
+            id="name-of-set"
+            placeholder="Type here ..."
+            style="width: 98%"
+          />
+          <button class="btn-add-new-block"></button>
         </div>
       </div>
     </div>
@@ -71,13 +78,48 @@
     <!-------------------------------------------------------------section learning---------------------------------------------------->
     <div class="learning" id="learn">
       <h2>Learning</h2>
-      <div class="board" id="myBoard"></div>
+      <div class="board" id="myBoard">
+        <p class="name">IELTS</p>
+        <p class="number">1/25</p>
+        <p class="vocab">Crucial</p>
+        <p class="mean">สำคัญ</p>
+        <button class="previous"></button>
+        <button class="next"></button>
+      </div>
     </div>
     <!--------------------------------------------------------end of section - learning------------------------------------------------------>
 
     <!----------------------------------------------------------------section practicing-------------------------------------------------------->
     <div class="practicing" id="practice">
       <h2>Practice</h2>
+      <div class="board" id="myBoard">
+        <p class="name">IELTS</p>
+        <p class="number">1/25</p>
+        <p class="question">Crucial</p>
+        <input
+          type="text"
+          class="ans"
+          id="answer"
+          placeholder="Type here ..."
+        />
+        <button class="btn-enter">enter</button>
+      </div>
+      <br />
+      <div class="scoreboard" id="score">
+        <img
+          src="/resource/correct.png"
+          alt=""
+          style="max-width: 30px; max-height: 30px"
+        />
+        <span>Correct: 0 </span>
+
+        <img
+          src="/resource/incorrect.png"
+          alt=""
+          style="max-width: 30px; max-height: 30px"
+        />
+        <span>Incorrect: 0</span>
+      </div>
     </div>
     <!------------------------------------------------------------------------end of section - practicing------------------------------------------------------>
 
