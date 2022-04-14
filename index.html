@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--basic information about this website-->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta name="viewport" content="width-device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Website for studying by using flashcard "
+    />
+    <meta
+      name="authors"
+      content="Group 21 Computer Engineering Essential 2022"
+    />
+    <meta name="keywords" content="flashcard vocabulary html css javascript" />
+    <!-- our topic -->
+    <title>Flash Card</title>
+    <!--font-->
+    <link rel="stylesheet" href="resource/font.css" />
+    <!--custom css-->
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+
+  <body>
+    <!--header-->
+    <div class="header" id="myHeader">
+      <h1>Flash Card</h1>
+    </div>
+    <!--end of header-->
+
+    <!----------------------------------------------------------section all sets------------------------------------------------------------------------>
+    <div class="allset" id="mySet">
+      <h2>My Set</h2>
+
+      <div class="container" id="container">
+        <!--each block-->
+        <div class="addblock" id="addblock">
+          <button
+            class="delSet"
+            id="delSet"
+            style="position: left; position: top"
+          ></button>
+          <button
+            class="editSet"
+            id="editSet"
+            style="position: rigth; position: top"
+          ></button>
+          <p class="textInTextBox">IELTS</p>
+          <button class="learningSet" id="learningSet">Learning</button>
+          <button class="practiceSet" id="practiceSet">Practice</button>
+        </div>
+        <!--example 1-->
+        <div class="addblock" id="addblock">
+          <button class="delSet" id="delSet"></button>
+          <button class="editSet" id="editSet"></button>
+          <p class="textInTextBox">Me</p>
+          <button class="learningSet" id="learningSet">Learning</button>
+          <button class="practiceSet" id="practiceSet">Practice</button>
+        </div>
+        <!--Add new Block-->
+        <div class="addblock" id="newblock">
+          <p class="textInTextBox">NEW</p>
+          <input type="text" id="name-of-set" placeholder="Type here ..." />
+          <div class="btn-add-new-block">+</div>
+        </div>
+      </div>
+    </div>
+    <!-------------------------------------------------------end of section - all sets------------------------------------------------------->
+
+    <!-------------------------------------------------------------section learning---------------------------------------------------->
+    <div class="learning" id="learn">
+      <h2>Learning</h2>
+      <div class="board" id="myBoard"></div>
+    </div>
+    <!--------------------------------------------------------end of section - learning------------------------------------------------------>
+
+    <!----------------------------------------------------------------section practicing-------------------------------------------------------->
+    <div class="practicing" id="practice">
+      <h2>Practice</h2>
+    </div>
+    <!------------------------------------------------------------------------end of section - practicing------------------------------------------------------>
+
+    <!-----------------------------------------------------------------section vocabs------------------------------------------------------------------>
+    <div class="vocabulary" id="vocab">
+      <h2>Vocabulary</h2>
+    </div>
+    <!-------------------------------------------------------------end of section - vocabs-------------------------------------------------------------->
+
+    <!----------------------------------------------------------------------custom js---------------------------------------------------------------------->
+    <script src="js/script.js"></script>
+  </body>
+</html>

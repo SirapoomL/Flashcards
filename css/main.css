@@ -1,0 +1,147 @@
+:root{
+    --black: #191b17;
+    --white: #ffffff;
+    --bluewhite: #E1F2FC;
+    --blue: #31a1ff;
+    --cyan: #BBCBFF;
+    --darkblue: #002060;
+    --orange: #ef8a20;
+    --yellow: #ffb247;
+    --cream: #FBDEBD;
+    --transition: all 0.5s ease-in-out;
+}
+*{
+    font-family: 'Mitr',sans-serif;
+    padding: 0px;
+    margin: 0px;
+}
+body {
+    background-color: var(--bluewhite);
+  }
+
+/*header*/
+.header {
+    padding: 10px 16px;
+    background: var(--white) ;
+    color: var(--orange);
+    box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    text-align: left;
+    font-weight: 700;
+  }
+
+h2{
+    size: 5px;
+    font-weight: 500;
+    color:#31a1ff;
+}
+
+/*all vocab set*/
+.allset{
+  /*go back to edit - it didn't have color*/
+  margin-top: 0.5rem;
+  margin-left: 2rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  
+}
+
+
+.container{
+  display: flex;
+  flex-wrap: wrap; /*ปัดขึ้นแถวใหม่*/
+  row-gap: 50px;
+  column-gap: 50px;  
+}
+
+.container .addblock{
+  background-color: var(--white);
+  box-shadow: 4px 4px 4px -2px var(--cyan);
+  padding: 15px 15px;
+  min-width: 200px; height: 200px
+ 
+}
+
+.textInTextBox {
+  text-align: center;
+  position : center;
+  padding-left : 25px;
+  padding-right: 25px; 
+}
+/*delete button in every block*/
+.delSet{
+  background-image: url("/resource/delete.png");
+  background-size: cover;
+  border: none;
+	float: left;
+  cursor: pointer;
+	width: 25px;
+	height: 25px;
+	background-color: transparent;
+
+}
+
+/*edit button in every block*/
+.editSet{
+  background-image: url("/resource/edit.png");
+  background-size: cover;
+  border: none;
+	float: right;
+  cursor: pointer;
+	width: 25px;
+	height: 25px;
+	background-color: transparent;
+
+}
+/*learning button in every block*/
+.learningSet{
+  box-shadow: 4px 4px 4px -1px var(--cyan);
+
+}
+/*practice button in every block*/
+.practiceSet{
+  box-shadow: 4px 4px 4px -1px var(--yellow);
+
+}
+
+.container .addnewblock{
+  background-color: var(--white);
+  text-align: center;
+  padding: 25px 25px;
+  box-shadow: 4px 4px 4px -2px var(--cyan);
+}
+
+/*Learning part*/
+.learning{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 2rem;
+  padding: 0.5rem;
+  
+}
+
+.learning .board{
+  background-color: var(--white);
+  box-shadow: 4px 4px 4px -2px var(--cyan);
+  padding: 15px 15px;
+  max-width: 1000px; 
+  height: 500px;
+  margin: auto;
+}
+
+/*Practice part*/
+.practicing{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 2rem;
+  padding: 0.5rem;
+}
+
+/*Vocab part*/
+.vocabulary{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 2rem;
+  padding: 0.5rem;
+}
+
