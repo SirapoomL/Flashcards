@@ -53,6 +53,44 @@ const flashcards = collection(db, 'flashcards');
 // export var check = [];
 
 export async function gentable(setid){
+    let tables = document.getElementById("content");
+    let head = document.createElement("thead");head.id = "newcontenthead";
+    let headtr = document.createElement("tr");
+    let word = document.createElement("th");word.innerText = "Word";
+    let meaning = document.createElement("th");meaning.innerText = "Meaning";
+    let buttonbox = document.createElement("th");
+    headtr.appendChild(word);headtr.appendChild(meaning);headtr.appendChild(buttonbox);head.appendChild(headtr);
+    if(document.getElementById("contenthead")){
+        let old = document.getElementById("contenthead");
+        head.id = "contenthead";
+        tables.replaceChild(head,old);
+        // console.log('replace');
+    }
+    else {
+        head.id = "contenthead";
+        tables.appendChild(head);
+        // console.log('new');
+    }
+    let lastrow = document.createElement("tr");lastrow.id = "newlast";
+    let input1 = document.createElement("input");input1.type = "text";input1.id = "word-to-add";
+    let wordtoadd = document.createElement("td");wordtoadd.appendChild(input1);
+    let input2 = document.createElement("input");input2.type = "text";input2.id = "meaning-to-add";
+    let meaningtoadd = document.createElement("td");meaningtoadd.appendChild(input2);
+    let buttontoadd  = document.createElement("button");buttontoadd.id = "add-newrow";buttontoadd.innerText = "Add";buttontoadd.onclick =function(){addnewitem();};
+    let buttonboxtoadd  = document.createElement("td");buttonboxtoadd.appendChild(buttontoadd);
+    lastrow.appendChild(wordtoadd);lastrow.appendChild(meaningtoadd);lastrow.appendChild(buttonboxtoadd);
+    if(document.getElementById("last")){
+        let old = document.getElementById("last");
+        lastrow.id = "last";
+        tables.replaceChild(lastrow,old);
+        // console.log('replace');
+    }
+    else {
+        lastrow.id = "last";
+        tables.appendChild(lastrow);
+        // console.log('new');
+    }
+
     const wordset = await doc(db,`flashcards/${setid}`);
     let Instance = await getDoc(wordset);
     Instance = Instance.data();
