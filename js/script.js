@@ -116,23 +116,25 @@ export async function addItem(setid) {
 }
 
 export async function deleteItem(setid,value) {
-        let i = value;
+        let i = value;let x = i;
         const wordset = await doc(db,`flashcards/${setid}`);
         let wordInstance = await getDoc(wordset);
         let Instance = wordInstance.data();
-        updateDoc(wordset,{
-            length : length - 1
+        const k = Instance.length - 1;
+        await updateDoc(wordset,{
+            length : Instance.length - 1
         })
-        while(i!=Instance.length){
-            const x = i+1;
+        while(i<k){
+            x++;
+            console.log(i);
             eval(`updateDoc(wordset,{
                 word`+i+` : Instance.word`+x+`,
                 meaning`+i+` : Instance.meaning`+x+`
             })`);
-            i = i+1;
+            i++;
         }
-        var row = this.parentNode.parentNode;
-        row.parentNode.removeChild(row);
+        // var row = this.parentNode.parentNode;
+        // row.parentNode.removeChild(row);
 //     console.log('deleteItem');
 //     const it = await getDocs(booksRef);
 //     const docId =""+ bookmark
@@ -169,9 +171,10 @@ async function addnewitem(){
     let deletebutton  = document.createElement("button");
 
     deletebutton.innerText="delete"
-    deletebutton.value=Instance.length-1//เป็น docid 
+    deletebutton.value=Instance.length-1;//เป็น docid 
     
-    // deletebutton.onclick=deleteItem('5M1JLKmEGPnlwDOVNT9o',deletebutton.value)//{//ตรงนี้เป็นฟังก์ชั่นลบrow+ลบข้อมูลในfirebase
+    deletebutton.onclick=function(){
+        deleteItem('5M1JLKmEGPnlwDOVNT9o',deletebutton.value);//{//ตรงนี้เป็นฟังก์ชั่นลบrow+ลบข้อมูลในfirebase
         // deleteItem(newbutton.value);
     //     let i = value;
     //     const wordset = await doc(db,`flashcards/${setid}`);
@@ -187,10 +190,10 @@ async function addnewitem(){
     //         })`);
     //         i = i+1;
     //     }
-    //     var row = this.parentNode.parentNode;
-    //     row.parentNode.removeChild(row);
-    // }
-    deletebutton.setAttribute("class","delete-row")
+         var row = this.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+    }
+    deletebutton.setAttribute("class","delete-row");
     buttonbox.appendChild(deletebutton);
     //เติมค่าในแถวใหม่
     newword.innerText=textinput1.value;
