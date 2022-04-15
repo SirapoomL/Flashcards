@@ -50,18 +50,25 @@ const flashcards = collection(db, 'flashcards');
 
 //--------------------------------------------------------------------------------------------------------------
 
-export var check = [];
+// export var check = [];
 
-export async function gentable(name){
-    const start = await getDocs(flashcards);
-    let pos = 0;
-    for(pos=0;((start.docs[i].data()).name) != name;i++);
-    for(let i=0;i<start.docs.length;i++){
-       var row = start.docs[pos].data();
-      // console.log(tmp.data())
-        addnewiteminit(row.word[i],row.owner,row.id)
-        check.push("row")
+export async function gentable(setid){
+    const wordset = await doc(db,`flashcards/${setid}`);
+    let Instance = await getDoc(wordset);
+    Instance = Instance.data();
+    const l = Instance.length;
+    for(let i=0;i<l;i++){
+        eval(`addnewiteminit(Instance.word`+i+`,Instance.meaning`+i+`,`+i+`)`);
     }
+    // const start = await getDocs(flashcards);
+    // let pos = 0;
+    // for(pos=0;((start.docs[i].data()).name) != name;i++);
+    // for(let i=0;i<start.docs.length;i++){
+    //    var row = start.docs[pos].data();
+    //   // console.log(tmp.data())
+    //     addnewiteminit(row.word[i],row.owner,row.id)
+    //     // check.push("row")
+    // }
 }
 
 async function del(btn){
@@ -73,8 +80,8 @@ async function del(btn){
 export async function addItem(setid) {
 // //     console.log('addItem');
     const wordset = await doc(db,`flashcards/${setid}`);
-    let wordInstance = await getDoc(wordset);
-    let Instance = wordInstance.data();
+    let Instance = await getDoc(wordset);
+    Instance = Instance.data();
     let word = document.getElementById('word-to-add').value;
     let meaning = document.getElementById('meaning-to-add').value;
     let toUpdate;
@@ -116,17 +123,30 @@ export async function addItem(setid) {
 }
 
 export async function deleteItem(setid,value) {
-        let i = value;let x = i;
         const wordset = await doc(db,`flashcards/${setid}`);
-        let wordInstance = await getDoc(wordset);
-        let Instance = wordInstance.data();
+        let Instance = await getDoc(wordset);
+        Instance = Instance.data();
+        let i = 0;
+        console.log(value);
+        let x;
+        let b = 1;
+        while(b){
+            eval(`x = Instance.word`+i+`+Instance.meaning`+i);
+            console.log(x);
+            eval(`if(x.normalize()===value.normalize())b=0;`);
+            i++;
+            if(i >= Instance.length){i = Instance.length;b=0;}
+        }
+        i--;
+        // eval(`while(i<Instance.length && Instance.word`+i+`+Instance.meaning`+i+`!=value){i++;console.log(i);}`);
+        x = i;
         const k = Instance.length - 1;
         await updateDoc(wordset,{
             length : Instance.length - 1
         })
         while(i<k){
             x++;
-            console.log(i);
+            // console.log(i);
             eval(`updateDoc(wordset,{
                 word`+i+` : Instance.word`+x+`,
                 meaning`+i+` : Instance.meaning`+x+`
@@ -156,8 +176,8 @@ async function addnewitem(){
     await addItem("5M1JLKmEGPnlwDOVNT9o");
     // let iddd = "5M1JLKmEGPnlwDOVNT9o";
     const wordset = await doc(db,`flashcards/5M1JLKmEGPnlwDOVNT9o`);
-    let wordInstance = await getDoc(wordset);
-    let Instance = wordInstance.data();
+    let Instance = await getDoc(wordset);
+    Instance = Instance.data();
     // let word = document.getElementById('word-to-add').value;
     // let meaning = document.getElementById('meaning-to-add').value;
     // let toUpdate;
@@ -171,10 +191,12 @@ async function addnewitem(){
     let deletebutton  = document.createElement("button");
 
     deletebutton.innerText="delete"
-    deletebutton.value=Instance.length-1;//เป็น docid 
+    deletebutton.value=textinput1.value+textinput2.value;//เป็น docid 
     
     deletebutton.onclick=function(){
         deleteItem('5M1JLKmEGPnlwDOVNT9o',deletebutton.value);//{//ตรงนี้เป็นฟังก์ชั่นลบrow+ลบข้อมูลในfirebase
+        var row = this.parentNode.parentNode;
+        row.parentNode.removeChild(row);
         // deleteItem(newbutton.value);
     //     let i = value;
     //     const wordset = await doc(db,`flashcards/${setid}`);
@@ -190,8 +212,6 @@ async function addnewitem(){
     //         })`);
     //         i = i+1;
     //     }
-         var row = this.parentNode.parentNode;
-        row.parentNode.removeChild(row);
     }
     deletebutton.setAttribute("class","delete-row");
     buttonbox.appendChild(deletebutton);
@@ -218,13 +238,12 @@ export async function addnewiteminit(word, meaning,docid){
     let newmeaning = document.createElement("td");
     let buttonbox  = document.createElement("td");
     let deletebutton  = document.createElement("button");
-    deletebutton.innerText="delete"
-    deletebutton.value=v
+    deletebutton.innerText="delete";
+    deletebutton.value=word+meaning;
     deletebutton.onclick=function(){
-        deleteItem(deletebutton.value);
+        deleteItem('5M1JLKmEGPnlwDOVNT9o',deletebutton.value);//{//ตรงนี้เป็นฟังก์ชั่นลบrow+ลบข้อมูลในfirebase
         var row = this.parentNode.parentNode;
         row.parentNode.removeChild(row);
-        
     }
     deletebutton.setAttribute("class","delete-row")
     buttonbox.appendChild(deletebutton);
@@ -235,6 +254,6 @@ export async function addnewiteminit(word, meaning,docid){
     row.appendChild(buttonbox);
 }   
 
-
+gentable("5M1JLKmEGPnlwDOVNT9o");
 
 window.addnewitem = addnewitem;
