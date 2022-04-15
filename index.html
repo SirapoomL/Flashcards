@@ -128,8 +128,24 @@
       <h2>Vocabulary</h2>
     </div>
     <!-------------------------------------------------------------end of section - vocabs-------------------------------------------------------------->
-
+    <table id = "content">
+      <thead>
+      <tr>
+      <th>Words</th>
+      <th>Meaning</th>
+      <th></th>
+      </tr>
+    </thead>
+        <tr id="last">
+              <td><input type="text" id = "word-to-add"></td>
+              <td><input type="text" id = "meaning-to-add"></td>
+              <td>
+                  <button id="add-newrow" onclick="addnewitem()"> เพิ่ม</button>
+              </td>
+          </tr>
+        
+    </table>
     <!----------------------------------------------------------------------custom js---------------------------------------------------------------------->
-    <script src="js/script.js"></script>
+    <script type="module" src="js/script.js"></script>
   </body>
 </html>

@@ -274,4 +274,45 @@ h2{
   margin-left: 2rem;
   padding: 0.5rem;
 }
-
+#content {
+  padding: 0;
+  width: 100%;
+  background: #eee;
+  border-radius: 8px;
+  box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1);
+  border-collapse: collapse;
+  overflow: hidden;
+}
+#content > thead {
+  background: #555;
+  color: white;
+}
+#content > thead > tr > th {
+  font-weight: lighter;
+  text-align: left;
+}
+#content td,
+#content th {
+  padding: 5px 10px;
+  font-weight: lighter;
+}
+#word-to-add,
+#meaning-to-add {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+}
+.delete-row,
+#add-newrow {
+  border-radius: 8px;
+  padding: 5px 10px;
+  border: 1px solid #aaa;
+  background: white;
+  width: 60px;
+  cursor: pointer;
+}
+.delete-row:hover,
+#add-newrow:hover {
+  background: rgb(255, 200, 105);
+  color: white;
+}
