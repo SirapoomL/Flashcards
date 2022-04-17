@@ -32,14 +32,7 @@ import {
 	query,
 	setDoc,
 	deleteDoc,
-    
     addDoc,
-    // collection,
-    // deleteDoc,
-    // doc,
-    // getDoc,
-    // getDocs,
-    // getFirestore,
     updateDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js";
 
@@ -48,11 +41,11 @@ const db = getFirestore();
 // const db = firebase.firestore();
 const flashcards = collection(db, 'flashcards');
 
-//--------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------
 
 // export var check = [];
 
-export async function gentable(setid){
+async function gentable(setid){
     let tables = document.getElementById("content");
     let head = document.createElement("thead");head.id = "newcontenthead";
     let headtr = document.createElement("tr");
@@ -76,7 +69,9 @@ export async function gentable(setid){
     let wordtoadd = document.createElement("td");wordtoadd.appendChild(input1);
     let input2 = document.createElement("input");input2.type = "text";input2.id = "meaning-to-add";
     let meaningtoadd = document.createElement("td");meaningtoadd.appendChild(input2);
-    let buttontoadd  = document.createElement("button");buttontoadd.id = "add-newrow";buttontoadd.innerText = "Add";buttontoadd.onclick =function(){addnewitem();};
+    let buttontoadd  = document.createElement("button");buttontoadd.id = "add-newrow";buttontoadd.innerText = "Add";
+    buttontoadd.value = setid;
+    buttontoadd.onclick =function(){addnewitem(buttontoadd.value);};
     let buttonboxtoadd  = document.createElement("td");buttonboxtoadd.appendChild(buttontoadd);
     lastrow.appendChild(wordtoadd);lastrow.appendChild(meaningtoadd);lastrow.appendChild(buttonboxtoadd);
     if(document.getElementById("last")){
@@ -115,7 +110,7 @@ async function del(btn){
 //         row.parentNode.removeChild(row);
 }
 
-export async function addItem(setid) {
+async function addItem(setid) {
 // //     console.log('addItem');
     const wordset = await doc(db,`flashcards/${setid}`);
     let Instance = await getDoc(wordset);
@@ -160,7 +155,7 @@ export async function addItem(setid) {
 //     }
 }
 
-export async function deleteItem(setid,value) {
+async function deleteItem(setid,value) {
         const wordset = await doc(db,`flashcards/${setid}`);
         let Instance = await getDoc(wordset);
         Instance = Instance.data();
@@ -202,7 +197,7 @@ export async function deleteItem(setid,value) {
 //     await deleteDoc(docRef);
 }
 
-async function addnewitem(){
+async function addnewitem(setid){
     //เอาค่าจากที่กรอก
     let textinput1 = document.getElementById("word-to-add");
     let textinput2 = document.getElementById("meaning-to-add");
@@ -211,9 +206,9 @@ async function addnewitem(){
     if(textinput1.value=="" && textinput2.value==""){return}
     
     //ใส่ค่าในfirebase และรอจนเสร็จ
-    await addItem("5M1JLKmEGPnlwDOVNT9o");
+    await addItem(setid);
     // let iddd = "5M1JLKmEGPnlwDOVNT9o";
-    const wordset = await doc(db,`flashcards/5M1JLKmEGPnlwDOVNT9o`);
+    const wordset = await doc(db,`flashcards/${setid}`);
     let Instance = await getDoc(wordset);
     Instance = Instance.data();
     // let word = document.getElementById('word-to-add').value;
@@ -232,7 +227,7 @@ async function addnewitem(){
     deletebutton.value=textinput1.value+textinput2.value;//เป็น docid 
     
     deletebutton.onclick=function(){
-        deleteItem('5M1JLKmEGPnlwDOVNT9o',deletebutton.value);//{//ตรงนี้เป็นฟังก์ชั่นลบrow+ลบข้อมูลในfirebase
+        deleteItem(setid,deletebutton.value);//{//ตรงนี้เป็นฟังก์ชั่นลบrow+ลบข้อมูลในfirebase
         var row = this.parentNode.parentNode;
         row.parentNode.removeChild(row);
         // deleteItem(newbutton.value);
@@ -267,7 +262,7 @@ async function addnewitem(){
    
 }
 
-export async function addnewiteminit(word, meaning,docid){
+async function addnewiteminit(word, meaning,docid){
     let tables = document.getElementById("content");
     let rowid = document.getElementById("last");
     var v= docid;
