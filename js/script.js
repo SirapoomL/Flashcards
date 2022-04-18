@@ -90,6 +90,12 @@ async function genSet(name,id){
 }
 
 async function createSet(){
+    let tables = document.getElementById("content");
+    tables.deleteTHead();
+    const x = tables.rows.length;
+    for(let i = 0;i < x;i++){
+        tables.deleteRow(0);
+    }
     const l = 0;
     const docRef = await addDoc(collection(db, "flashcards"), {
     name: document.getElementById(`nameofset`).value,
@@ -124,9 +130,16 @@ async function createSet(){
     div.appendChild(practice);
     document.getElementById(`container`).insertBefore(div,document.getElementById(`newblock`));
     document.getElementById(`nameofset`).value = "";
+    gentable(docRef.id);
 }
 
 async function deleteSet(setid){
+    let tables = document.getElementById("content");
+    tables.deleteTHead();
+    const x = tables.rows.length;
+    for(let i = 0;i < x;i++){
+        tables.deleteRow(0);
+    }
     const setList = await doc(db,`flashcards/LPGlXHRwJIOvjp3zg0sL`);
     let Instance = await getDoc(setList);
     Instance = Instance.data();
