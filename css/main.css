@@ -73,7 +73,7 @@ h2{
 
 /*delete button in every block*/
 .delSet{
-  background-image: url("/resource/delete.png");
+  background-image: url("https://media.discordapp.net/attachments/963438694545621032/965610418993254440/delete.png");
   background-size: cover;
   border: none;
   cursor: pointer;
@@ -83,10 +83,13 @@ h2{
   position: relative;
   left: 10px;
 }
+.delSet:hover{
+  opacity: 0.7;
+}
 
 /*edit button in every block*/
 .editSet{
-  background-image: url("/resource/edit.png");
+  background-image: url("https://media.discordapp.net/attachments/963438694545621032/965610432817680464/edit.png");
   background-size: cover;
   border: none;
 	position: relative;
@@ -95,9 +98,10 @@ h2{
 	width: 25px;
 	height: 25px;
 	background-color: transparent;
-
 }
-
+.editSet:hover{
+  opacity: 0.7;
+}
 /*learning button in every block*/
 .learningSet{
   box-shadow: 3px 3px 3px -1px var(--cyan);
@@ -111,6 +115,13 @@ h2{
   position: relative;
   top: 100px;
   right: -20px;
+}
+
+.learningSet:hover{
+  box-shadow: 3px 3px 3px -1px var(--blue);
+  background-color: var(--cyan);
+  color: var(--darkblue);
+  
 }
 /*practice button in every block*/
 .practiceSet{
@@ -127,10 +138,16 @@ h2{
   left: 30px;
 }
 
+.practiceSet:hover{
+  box-shadow: 3px 3px 3px -1px var(--orange);
+  background-color: var(--yellow);
+  color: var(--black);
+}
+
 
 /*new block button*/
 .btn-add-new-block{
-  background-image: url("/resource/plus.png");
+  background-image: url("https://media.discordapp.net/attachments/963438694545621032/965610487247159306/plus.png");
   background-size: cover;
   border: none;
   cursor: pointer;
@@ -141,6 +158,9 @@ h2{
   top: 50px;  
   left: 90px;
   margin: auto;
+}
+.btn-add-new-block:hover{
+  opacity: 0.7;
 }
 /*-------------------------------end of my set part----------------------------------*/
 
@@ -186,7 +206,7 @@ h2{
   text-align: center;
 }
 .previous{
-  background-image: url("/resource/arrow-left.png");
+  background-image: url("https://media.discordapp.net/attachments/963438694545621032/965610381139664966/arrow-left.png");
   background-size: cover;
   border: none;
   cursor: pointer;
@@ -197,7 +217,7 @@ h2{
 
 }
 .next{
-  background-image: url("/resource/arrow-right.png");
+  background-image: url("https://media.discordapp.net/attachments/963438694545621032/965610394393657444/arrow-right.png");
   background-size: cover;
   border: none;
   cursor: pointer;
@@ -276,15 +296,16 @@ h2{
 }
 #content {
   padding: 0;
-  width: 100%;
-  background: #eee;
+  width: 95%;
+  margin: auto;
+  background: white;
   border-radius: 8px;
-  box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 2px 0 var(--cyan);
   border-collapse: collapse;
   overflow: hidden;
 }
 #content > thead {
-  background: #555;
+  background: var(--darkblue);
   color: white;
 }
 #content > thead > tr > th {
