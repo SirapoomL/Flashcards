@@ -43,6 +43,124 @@ const flashcards = collection(db, 'flashcards');
 
 //----------------------------------------------My set-------------------------------------------------------------------------
 
+async function genMySet(){
+    const setList = await doc(db,`flashcards/LPGlXHRwJIOvjp3zg0sL`);
+    let Instance = await getDoc(setList);
+    Instance = Instance.data();
+    const l = Instance.count;
+    let name;let id;
+    for(let i=0;i<l;i++){
+        eval(`name = Instance.name`+i);
+        eval(`id = Instance.id`+i);
+        genSet(name,id);
+        // document.getElementById(`container`).appendChild(genSet(name,id));
+    }
+    let div  = document.createElement(`div`);div.className = "addblock";div.id = "newblock";
+    let text = document.createElement(`p`);text.className = "textInTextBox";text.innerText = "NEW SET";
+    let input = document.createElement(`input`);input.type = "text";input.placeholder="Type here ...";
+    input.id = "nameofset";input.style="width: 98%";
+    let button = document.createElement(`button`);button.className = "btn-add-new-block";
+    button.onclick=function(){createSet();};
+    div.appendChild(text);
+    div.appendChild(document.createElement(`br`));
+    div.appendChild(document.createElement(`br`));
+    div.appendChild(input);
+    div.appendChild(button);
+    document.getElementById(`container`).appendChild(div);
+}
+
+async function genSet(name,id){
+    let div  = document.createElement(`div`);div.className = "addblock";div.id = "addblock";
+    let del = document.createElement(`button`);del.className = "delSet";del.id = "delSet";
+    del.value = id;del.onclick = function(){deleteSet(del.value);edit.parentNode.parentNode.removeChild(edit.parentNode);};
+    let edit = document.createElement(`button`);edit.className = "editSet";del.id = "editSet";
+    edit.value = id;edit.onclick = function(){editSet(edit.value);};
+    let text = document.createElement(`p`);text.className = "textInTextBox";text.innerText = name;
+    let learning = document.createElement(`button`);learning.className = "learningSet";
+    learning.id = "learningSet";learning.innerText = "Learning";learning.value = id;
+    let practice = document.createElement(`button`);practice.className = "practiceSet";
+    practice.id = "practiceSet";practice.innerText = "Practice";practice.value = id;
+    div.appendChild(del);
+    div.appendChild(edit);
+    div.appendChild(text);
+    div.appendChild(learning);
+    div.appendChild(practice);
+    // return div;
+    document.getElementById(`container`).appendChild(div);
+}
+
+async function createSet(){
+    const l = 0;
+    const docRef = await addDoc(collection(db, "flashcards"), {
+    name: document.getElementById(`nameofset`).value,
+    length : l
+    });
+  
+    const setList = await doc(db,`flashcards/LPGlXHRwJIOvjp3zg0sL`);
+    let Instance = await getDoc(setList);
+    Instance = Instance.data();
+    const len = Instance.count;
+    eval(`updateDoc(setList,{
+        name`+len+` : document.getElementById("nameofset").value,
+        id`+len+` : docRef.id,
+        count : Instance.count+1
+    })`)
+
+    
+    let div  = document.createElement(`div`);div.className = "addblock";div.id = "addblock";
+    let del = document.createElement(`button`);del.className = "delSet";del.id = "delSet";
+    del.value = docRef.id;del.onclick = function(){deleteSet(del.value);edit.parentNode.parentNode.removeChild(edit.parentNode);};
+    let edit = document.createElement(`button`);edit.className = "editSet";del.id = "editSet";
+    edit.value = docRef.id;edit.onclick = function(){editSet(edit.value);};
+    let text = document.createElement(`p`);text.className = "textInTextBox";text.innerText = document.getElementById(`nameofset`).value;
+    let learning = document.createElement(`button`);learning.className = "learningSet";
+    learning.id = "learningSet";learning.innerText = "Learning";learning.value = docRef.id;
+    let practice = document.createElement(`button`);practice.className = "practiceSet";
+    practice.id = "practiceSet";practice.innerText = "Practice";practice.value = docRef.id;
+    div.appendChild(del);
+    div.appendChild(edit);
+    div.appendChild(text);
+    div.appendChild(learning);
+    div.appendChild(practice);
+    document.getElementById(`container`).insertBefore(div,document.getElementById(`newblock`));
+    document.getElementById(`nameofset`).value = "";
+}
+
+async function deleteSet(setid){
+    const setList = await doc(db,`flashcards/LPGlXHRwJIOvjp3zg0sL`);
+    let Instance = await getDoc(setList);
+    Instance = Instance.data();
+    let l = Instance.count;
+    let i = 0;let k = -1;
+    for(i = 0;i<l;i++){
+        if(eval(`setid.normalize()===Instance.id`+i+`.normalize()`)){k = i;}
+        if(k!=-1)break;
+    }
+    eval(`deleteDoc(doc(db,"flashcards",Instance.id`+k+`))`);
+    await updateDoc(setList,{
+        count : Instance.count - 1
+    })
+    i++;l--;
+    while(k<l){
+        i++;
+        // console.log(i);
+        eval(`updateDoc(setList,{
+            name`+k+` : Instance.name`+i+`,
+            id`+k+` : Instance.id`+i+`
+        })`);
+        k++;
+    }
+}
+
+async function editSet(setid){
+    let tables = document.getElementById("content");
+    tables.deleteTHead();
+    const x = tables.rows.length;
+    for(let i = 0;i < x;i++){
+        tables.deleteRow(0);
+    }
+    gentable(setid);
+}
 //----------------------------------------------Learning-------------------------------------------------------------------------
 
 //----------------------------------------------Table-------------------------------------------------------------------------
@@ -106,12 +224,6 @@ async function gentable(setid){
     //     addnewiteminit(row.word[i],row.owner,row.id)
     //     // check.push("row")
     // }
-}
-
-async function del(btn){
-//     console.log('del');
-//     var row = btn.parentNode.parentNode;
-//         row.parentNode.removeChild(row);
 }
 
 async function addItem(setid) {
@@ -291,6 +403,6 @@ async function addnewiteminit(word, meaning,docid){
     row.appendChild(buttonbox);
 }   
 
-gentable("5M1JLKmEGPnlwDOVNT9o");
+genMySet();
 
 window.addnewitem = addnewitem;
