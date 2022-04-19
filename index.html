@@ -76,13 +76,13 @@
     <!-------------------------------------------------------end of section - all sets------------------------------------------------------->
 
     <!-------------------------------------------------------------section learning---------------------------------------------------->
-    <div class="learning" id="learn">
+    <div class="learning" id="learning">
       <h2>Learning</h2>
-      <div class="board" id="myBoard">
-        <p class="name">IELTS</p>
-        <p class="number">1/25</p>
-        <p class="vocab">Crucial</p>
-        <p class="mean">สำคัญ</p>
+      <div class="board" id="learning-card">
+        <p class="name" id="learning-set-name">IELTS</p>
+        <p class="number" id="learning-number">1/25</p>
+        <p class="vocab" id="learning-vocab">Crucial</p>
+        <p class="mean" id="learning-meaning">สำคัญ</p>
         <button class="previous"></button>
         <button class="next"></button>
       </div>
@@ -92,33 +92,33 @@
     <!----------------------------------------------------------------section practicing-------------------------------------------------------->
     <div class="practicing" id="practice">
       <h2>Practice</h2>
-      <div class="board" id="myBoard">
-        <p class="name">IELTS</p>
-        <p class="number">1/25</p>
-        <p class="question">Crucial</p>
+      <div class="board" id="practice-card">
+        <p class="name" id="practice-set-name">IELTS</p>
+        <p class="number" id="practice-number">1/25</p>
+        <p class="question" id="practice-question">Crucial</p>
         <input
           type="text"
           class="ans"
-          id="answer"
+          id="practice-answer"
           placeholder="Type here ..."
         />
         <button class="btn-enter">enter</button>
       </div>
       <br />
-      <div class="scoreboard" id="score">
+      <div class="scoreboard" id="scoreboard">
         <img
           src="/resource/correct.png"
           alt=""
           style="max-width: 30px; max-height: 30px"
         />
-        <span>Correct: 0 </span>
+        <span>Correct: <span id="score-correct">0</span></span>
 
         <img
           src="/resource/incorrect.png"
           alt=""
           style="max-width: 30px; max-height: 30px"
         />
-        <span>Incorrect: 0</span>
+        <span>Incorrect: <span id="score-incorrect">0</span></span>
       </div>
     </div>
     <!------------------------------------------------------------------------end of section - practicing------------------------------------------------------>
