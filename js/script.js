@@ -175,6 +175,7 @@ async function editSet(setid){
     gentable(setid);
 }
 //----------------------------------------------Learning & Practice------------------------------------------------------------
+//when click learning button in particular set on My Set
 async function showLearning(setid){
     const wordset = await doc(db,`flashcards/${setid}`);
     let Instance = await getDoc(wordset).docs;
@@ -187,6 +188,7 @@ async function showLearning(setid){
     }
 }
 
+//when click practice button in particular set on My Set
 async function showPractice(setid){
     const wordset = await doc(db,`flashcards/${setid}`);
     let Instance = await getDoc(wordset).docs;
@@ -198,6 +200,7 @@ async function showPractice(setid){
     }
 }
 
+//when click next item button in learning section
 async function nextItem(setid, index){
     const wordset = await doc(db,`flashcards/${setid}`);
     let Instance = await getDoc(wordset).docs;
@@ -213,6 +216,7 @@ async function nextItem(setid, index){
     document.getElementsById("learning-meaning").value = meaning;
 }
 
+//when click previous item button in learning section
 async function prevItem(setid, index){
     const wordset = await doc(db,`flashcards/${setid}`);
     let Instance = await getDoc(wordset).docs;
@@ -228,21 +232,7 @@ async function prevItem(setid, index){
     document.getElementsById("learning-meaning").value = meaning;
 }
 
-async function nextQuestion(setid, index){
-    const wordset = await doc(db,`flashcards/${setid}`);
-    let Instance = await getDoc(wordset).docs;
-
-    let nextIndex = index + 1;
-    if (nextIndex === Instance.length) {
-        practiceDone();
-    }
-
-    let word = Instance.word[nextIndex];
-    document.getElementById("practice-number").value = nextIndex + 1;
-    document.getElementById("practice-question").value = word;
-    document.getElementById("practice-answer").value = "";
-}
-
+//when click enter to check answer in practice section
 async function checkAnser(setid, index){
     const wordset = await doc(db,`flashcards/${setid}`);
     let Instance = await getDoc(wordset).docs;
@@ -262,6 +252,23 @@ async function checkAnser(setid, index){
     nextQuestion(setid, index);
 }
 
+//invoked automatically after checkAnswer function done
+async function nextQuestion(setid, index){
+    const wordset = await doc(db,`flashcards/${setid}`);
+    let Instance = await getDoc(wordset).docs;
+
+    let nextIndex = index + 1;
+    if (nextIndex === Instance.length) {
+        practiceDone();
+    }
+
+    let word = Instance.word[nextIndex];
+    document.getElementById("practice-number").value = nextIndex + 1;
+    document.getElementById("practice-question").value = word;
+    document.getElementById("practice-answer").value = "";
+}
+
+//invoked when practice set last item is done
 async function practiceDone() {
     
 }
