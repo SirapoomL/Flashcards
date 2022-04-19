@@ -73,7 +73,7 @@ h2{
 
 /*delete button in every block*/
 .delSet{
-  background-image: url("https://media.discordapp.net/attachments/963438694545621032/965610418993254440/delete.png");
+  background-image: url("/resource/delete.png");
   background-size: cover;
   border: none;
   cursor: pointer;
@@ -89,7 +89,7 @@ h2{
 
 /*edit button in every block*/
 .editSet{
-  background-image: url("https://media.discordapp.net/attachments/963438694545621032/965610432817680464/edit.png");
+  background-image: url("/resource/edit.png");
   background-size: cover;
   border: none;
 	position: relative;
@@ -147,7 +147,7 @@ h2{
 
 /*new block button*/
 .btn-add-new-block{
-  background-image: url("https://media.discordapp.net/attachments/963438694545621032/965610487247159306/plus.png");
+  background-image: url("/resource/plus.png");
   background-size: cover;
   border: none;
   cursor: pointer;
@@ -182,29 +182,38 @@ h2{
   max-width: 1000px; 
   height: 500px;
   margin: auto;
+  
 }
 .name{
   font-size: 20px;
   font-weight: 600;
-  text-align: left;
-  float: left;
+  position: absolute;
+  transform: translate(0, -30%);
+  padding: 10px;
 }
 .number{
   font-size: 20px;
   font-weight: 600;
-  text-align: left;
-  float: right;
+  text-align: right;
+  position: relative;
+  transform: translate(0%, -20%);
 }
 .learning .vocab{
   font-size: 50px;
   font-weight: 800;
   text-align: center;
+  position: relative;
+  top: 20%;
 }
 .learning .mean{
   font-size: 40px;
   font-weight: 300;
   text-align: center;
+  position: relative;
+  top: 20%;
+
 }
+
 .previous{
   background-image: url("https://media.discordapp.net/attachments/963438694545621032/965610381139664966/arrow-left.png");
   background-size: cover;
@@ -214,6 +223,10 @@ h2{
 	height: 40px;
 	background-color: transparent;
   margin: auto;
+  position: relative;
+  top: 50%;
+  left: 40%;
+
 
 }
 .next{
@@ -225,6 +238,10 @@ h2{
 	height: 40px;
 	background-color: transparent;
   margin: auto;
+  position: relative;
+  top: 50%;
+  left: 50%;
+
 }
 /*-------------------------------ending of learning part----------------------------------*/
 
@@ -241,16 +258,17 @@ h2{
   font-weight: 800;
   text-align: center;
   position: relative;
-  top: 150px;
+  top: 20%;
 }
 .ans{
-  max-width: 600px;
-  min-width: 300px;
+  width: 75%;
   height: 40px;
   font-size: 18px;
   text-align: center;
   position: relative;
-  top: 175px;
+  top: 20%;
+  left: 12.5%;
+
 }
 .btn-enter{
   text-transform: uppercase;
@@ -263,12 +281,13 @@ h2{
   cursor: pointer;
   margin: auto;
   padding: 10px;
-  width: 250px;
-  height: 45px;
+  width: 30%;
+  height: 10%;
   border-radius: 10%;
-
   position: relative;
-  top: 300px;
+  top: 50%;
+  left: 34.75%;
+
 }
 
 /*score board*/
@@ -282,6 +301,7 @@ h2{
   margin: auto;
   text-align: center;
   font-size: 20px;
+  border: 5px solid #FFFF00;
 }
 
 
