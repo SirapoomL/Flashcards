@@ -32,120 +32,64 @@
     <!----------------------------------------------------------section all sets------------------------------------------------------------------------>
     <div class="allset" id="mySet">
       <h2>My Set</h2>
-
-      <div class="container" id="container">
-        <!-- each block
-        <div class="addblock" id="addblock">
-          <button class="delSet" id="delSet"></button>
-          <button class="editSet" id="editSet"></button>
-          <p class="textInTextBox">IELTS</p>
-          <button class="learningSet" id="learningSet">Learning</button>
-          <button class="practiceSet" id="practiceSet">Practice</button>
-        </div>
-        example 1
-        <div class="addblock" id="addblock">
-          <button class="delSet" id="delSet" onclick="deleteset()"></button>
-          <button class="editSet" id="editSet"></button>
-          <p class="textInTextBox">Meowmeowmeowmeow</p>
-          <button class="learningSet" id="learningSet">Learning</button>
-          <button class="practiceSet" id="practiceSet">Practice</button>
-        </div>
-        example 2
-        <div class="addblock" id="addblock">
-          <button class="delSet" id="delSet"></button>
-          <button class="editSet" id="editSet"></button>
-          <p class="textInTextBox">HelloFrom</p>
-          <button class="learningSet" id="learningSet">Learning</button>
-          <button class="practiceSet" id="practiceSet">Practice</button>
-        </div>
-        Add new Block
-        <div class="addblock" id="newblock">
-          <p class="textInTextBox">NEW</p>
-          <br />
-          <br />
-          <input
-            type="text"
-            id="name-of-set"
-            placeholder="Type here ..."
-            style="width: 98%"
-          />
-          <button class="btn-add-new-block"></button>
-        </div> -->
-      </div>
+      <div class="container" id="container"></div>
     </div>
     <!-------------------------------------------------------end of section - all sets------------------------------------------------------->
-    <table id="headsection"><thead><tr><h2 id="topic"></h2></tr></thead><tr id="topicbody">
-    <!-------------------------------------------------------------section learning---------------------------------------------------->
-    <div class="learning" id="learning">
-      <!-- <h2>Learning</h2> -->
-      <div class="board" id="learning-card">
-        <p class="name" id="learning-set-name">IELTS</p>
-        <p class="number" id="learning-number">1/25</p>
-        <p class="vocab" id="learning-vocab">Crucial</p>
-        <p class="mean" id="learning-meaning">สำคัญ</p>
-        <button class="previous"></button>
-        <button class="next"></button>
-      </div>
-    </div>
-    <!--------------------------------------------------------end of section - learning------------------------------------------------------>
-
-    <!----------------------------------------------------------------section practicing-------------------------------------------------------->
-    <div class="practicing" id="practice">
-      <!-- <h2>Practice</h2> -->
-      <div class="board" id="practice-card">
-        <p class="name" id="practice-set-name">IELTS</p>
-        <p class="number" id="practice-number">1/25</p>
-        <p class="question" id="practice-question">Crucial</p>
-        <input
-          type="text"
-          class="ans"
-          id="practice-answer"
-          placeholder="Type here ..."
-        />
-        <button class="btn-enter">enter</button>
-      </div>
-      <br />
-      <div class="scoreboard" id="scoreboard">
-        <img
-          src="/resource/correct.png"
-          alt=""
-          style="max-width: 30px; max-height: 30px"
-        />
-        <span>Correct: <span id="score-correct">0</span></span>
-
-        <img
-          src="/resource/incorrect.png"
-          alt=""
-          style="max-width: 30px; max-height: 30px"
-        />
-        <span>Incorrect: <span id="score-incorrect">0</span></span>
-      </div>
-    </div>
-    <!------------------------------------------------------------------------end of section - practicing------------------------------------------------------>
-
-    <!-----------------------------------------------------------------section vocabs------------------------------------------------------------------>
-    <!-- <div class="vocabulary" id="vocab"> -->
-      <!-- <h2>Vocabulary</h2> -->
-    <!-- </div> -->
-    <!-------------------------------------------------------------end of section - vocabs-------------------------------------------------------------->
-    <table id="content">
-      <!-- <thead id = "contenthead">
+    <table id="headsection">
+      <thead>
         <tr>
-        <th>Words</th>
-        <th>Meaning</th>
-        <th></th>
+          <h2 id="topic"></h2>
         </tr>
-      </thead> -->
-      <!-- <tr id="last">
-        <td><input type="text" id = "word-to-add"></td>
-        <td><input type="text" id = "meaning-to-add"></td>
-        <td>
-          <button id="add-newrow" onclick="addnewitem()"> เพิ่ม</button>
-        </td>
-      </tr> -->
+      </thead>
+      <tr id="topicbody">
+        <!-------------------------------------------------------------section learning---------------------------------------------------->
+        <div class="learning" id="learning">
+          <!-- <h2>Learning</h2> -->
+          <div class="board" id="learning-card">
+            <p class="name" id="learning-set-name">IELTS</p>
+            <p class="number" id="learning-number">1/25</p>
+            <p class="vocab" id="learning-vocab">Crucial</p>
+            <p class="mean" id="learning-meaning">สำคัญ</p>
+            <button class="previous"></button>
+            <button class="next"></button>
+          </div>
+        </div>
+        <!--------------------------------------------------------end of section - learning------------------------------------------------------>
+
+        <!-----------------------------------------section practicing-------------------------------------------------------->
+        <div class="practicing" id="practice">
+          <div class="board" id="practice-card">
+            <p class="name" id="practice-set-name">IELTS</p>
+            <p class="number" id="practice-number">1/25</p>
+            <p class="correct">
+              <img class="correct-img" src="/resource/correct.png" alt="" />
+              :
+              <span id="score-correct">100</span>
+            </p>
+            <p class="incorrect">
+              <img class="incorrect-img" src="/resource/incorrect.png" alt="" />
+              :
+              <span id="score-incorrect">100</span>
+            </p>
+            <p class="question" id="practice-question">Crucial</p>
+            <input
+              type="text"
+              class="ans"
+              id="practice-answer"
+              placeholder="Type here ..."
+            />
+            <button class="btn-enter">enter</button>
+          </div>
+        </div>
+        <!-------------------------------------end of section - practicing------------------------------------------------------>
+
+        <!-----------------------------------------------------------------section vocabs------------------------------------------------------------------>
+        <table id="content"></table>
+        <!-------------------------------------------------------------end of section - vocabs-------------------------------------------------------------->
+
+        <!----------------------------------------------------------------------custom js---------------------------------------------------------------------->
+      </tr>
     </table>
-    <!----------------------------------------------------------------------custom js---------------------------------------------------------------------->
-  </tr></table>
     <script type="module" src="js/script.js"></script>
   </body>
 </html>
