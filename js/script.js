@@ -175,7 +175,38 @@ async function editSet(setid){
     gentable(setid);
 }
 //----------------------------------------------Learning-------------------------------------------------------------------------
+async function showLearning(setid){
+    const wordset = await doc(db,`flashcards/${setid}`);
+    let Instance = await getDoc(wordset).docs;
+    if (Instance.length > 0) {
+        let word = Instance.word[0];
+        let meaning = Instance.meaning[0];
+        document.getElementById("learning-vocab").value = word;
+        document.getElementsByClassName("learning-meaning").value = meaning;
+    }
+}
 
+async function showPractice(setid){
+    const wordset = await doc(db,`flashcards/${setid}`);
+    let Instance = await getDoc(wordset).docs;
+    if (Instance.length > 0) {
+        let word = Instance.word[0];
+        document.getElementById("practice-question").value = word;
+        document.getElementsByClassName("learning-meaning").value = meaning;
+    }
+}
+
+async function nextItem(setid, index){
+    
+}
+
+async function prevItem(setid, index){
+
+}
+
+async function checkAnser(setid, index){
+
+}
 //----------------------------------------------Table-------------------------------------------------------------------------
 
 // export var check = [];
