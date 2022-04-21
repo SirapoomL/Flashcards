@@ -378,3 +378,68 @@ h2{
   background: rgb(255, 200, 105);
   color: white;
 }
+
+/*login part*/
+.login-container{
+  background-color: var(--white);
+  box-shadow: 4px 4px 4px -2px var(--cyan);
+  padding: 25px 25px;
+  width: 40%;
+  height: 40%;
+  max-width: 400px;
+  max-height: 400px;
+  min-width: 200px;
+  min-height: 200px;
+  margin: auto;
+  border-radius: 5%;
+
+}
+.username{
+  width: 60%;
+  text-align: center;
+  position: relative;
+  left: 20%;
+
+}
+.password{
+  width: 60%;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  left: 20%;
+  transform: translate(0%, 100%);
+
+
+}
+.inform{
+  font-size: 100%;
+  position: relative;
+  transform: translate(0%, 175%);
+  text-align: center;
+}
+.btn-login{
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 3px 3px 3px -1px var(--cyan);
+  background-color: var(--blue);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  margin: auto;
+  width: 30%;
+  height: 10%;
+  min-width: 70px;
+  min-height: 50px;
+  border-radius: 10%;
+  position: relative;
+  left: 35%;
+  transform: translate(0%, 130%);
+
+}
+.bth-login:hover{
+  box-shadow: 3px 3px 3px -1px var(--blue);
+  background-color: var(--cyan);
+  color: var(--darkblue);
+}
