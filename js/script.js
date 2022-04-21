@@ -80,6 +80,7 @@ async function login(){
 
 async function genMySet(user){
     const setList = await doc(db,`flashcards/LPGlXHRwJIOvjp3zg0sL`);
+    document.getElementById('mysettextbox').innerText = "My Set";
     let Instance = await getDoc(setList);
     Instance = Instance.data();
     const l = Instance.count;
