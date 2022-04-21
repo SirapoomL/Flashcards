@@ -41,18 +41,55 @@ const db = getFirestore();
 // const db = firebase.firestore();
 const flashcards = collection(db, 'flashcards');
 
+//----------------------------------------------Login--------------------------------------------------------------------------
+
+async function login(){
+    let div = document.getElementById('logincontainer');
+    let user = document.getElementById('userid');user = user.value;
+    let password = document.getElementById('userpassword');password = password.value;
+    let inform = document.getElementById('inform');
+    let x = -1;
+    const idList = await doc(db,`flashcards/sWRPc6e8xIsEOwDx1thr`);
+    let Instance = await getDoc(idList);
+    Instance = Instance.data();
+    const len = Instance.len;
+    for(let i=0;i<len;i++){
+        eval(`  if(Instance.user`+i+`.normalize()===user.normalize()){
+                    x = 0;
+                    if(Instance.password`+i+`.normalize()===password.normalize()){x=1;}
+                };`);
+    }
+    if(x > 0){
+        div.parentNode.removeChild(div);
+        genMySet(user);
+    }else if(x > -1){
+        // inform.innerText = "Wrong Password";
+        document.getElementById('userid').value = "";
+        document.getElementById('userpassword').value = "";
+    }else {
+        div.parentNode.removeChild(div);
+        eval(`updateDoc(idList,{
+            user`+len+` : user,
+            password`+len+` : password,
+            len : Instance.len+1
+        })`)
+        genMySet(user);
+    }
+}
+
 //----------------------------------------------My set-------------------------------------------------------------------------
 
-async function genMySet(){
+async function genMySet(user){
     const setList = await doc(db,`flashcards/LPGlXHRwJIOvjp3zg0sL`);
     let Instance = await getDoc(setList);
     Instance = Instance.data();
     const l = Instance.count;
-    let name;let id;
+    let name;let id;let userr;
     for(let i=0;i<l;i++){
         eval(`name = Instance.name`+i);
         eval(`id = Instance.id`+i);
-        genSet(name,id);
+        eval(`userr = Instance.user`+i)
+        if(user.normalize()===userr.normalize())genSet(name,id);
         // document.getElementById(`container`).appendChild(genSet(name,id));
     }
     let div  = document.createElement(`div`);div.className = "addblock";div.id = "newblock";
@@ -60,7 +97,8 @@ async function genMySet(){
     let input = document.createElement(`input`);input.type = "text";input.placeholder="Type here ...";
     input.id = "nameofset";input.style="width: 98%";
     let button = document.createElement(`button`);button.className = "btn-add-new-block";
-    button.onclick=function(){createSet();};
+    button.value = user;
+    button.onclick=function(){createSet(user);};
     div.appendChild(text);
     div.appendChild(document.createElement(`br`));
     div.appendChild(document.createElement(`br`));
@@ -89,7 +127,7 @@ async function genSet(name,id){
     document.getElementById(`container`).appendChild(div);
 }
 
-async function createSet(){
+async function createSet(user){
     let tables = document.getElementById("content");
     tables.deleteTHead();
     const x = tables.rows.length;
@@ -98,8 +136,8 @@ async function createSet(){
     }
     const l = 0;
     const docRef = await addDoc(collection(db, "flashcards"), {
-    name: document.getElementById(`nameofset`).value,
-    length : l
+        name: document.getElementById(`nameofset`).value,
+        length : l
     });
   
     const setList = await doc(db,`flashcards/LPGlXHRwJIOvjp3zg0sL`);
@@ -109,6 +147,7 @@ async function createSet(){
     eval(`updateDoc(setList,{
         name`+len+` : document.getElementById("nameofset").value,
         id`+len+` : docRef.id,
+        user`+len+` : user,
         count : Instance.count+1
     })`)
 
@@ -322,7 +361,7 @@ async function gentable(setid){
     Instance = Instance.data();
     const l = Instance.length;
     for(let i=0;i<l;i++){
-        eval(`addnewiteminit(Instance.word`+i+`,Instance.meaning`+i+`,`+i+`)`);
+        eval(`addnewiteminit(setid,Instance.word`+i+`,Instance.meaning`+i+`,`+i+`)`);
     }
 }
 
@@ -342,12 +381,12 @@ async function deleteItem(setid,value) {
         let Instance = await getDoc(wordset);
         Instance = Instance.data();
         let i = 0;
-        console.log(value);
+        // console.log(value);
         let x;
         let b = 1;
         while(b){
             eval(`x = Instance.word`+i+`+Instance.meaning`+i);
-            console.log(x);
+            // console.log(x);
             eval(`if(x.normalize()===value.normalize())b=0;`);
             i++;
             if(i >= Instance.length){i = Instance.length;b=0;}
@@ -406,7 +445,7 @@ async function addnewitem(setid){
    
 }
 
-async function addnewiteminit(word, meaning,docid){
+async function addnewiteminit(setid,word, meaning,docid){
     let tables = document.getElementById("content");
     let rowid = document.getElementById("last");
     var v= docid;
@@ -417,8 +456,9 @@ async function addnewiteminit(word, meaning,docid){
     let deletebutton  = document.createElement("button");
     deletebutton.innerText="delete";
     deletebutton.value=word+meaning;
+    buttonbox.value = setid;
     deletebutton.onclick=function(){
-        deleteItem('5M1JLKmEGPnlwDOVNT9o',deletebutton.value);//{//ตรงนี้เป็นฟังก์ชั่นลบrow+ลบข้อมูลในfirebase
+        deleteItem(buttonbox.value,deletebutton.value);//{//ตรงนี้เป็นฟังก์ชั่นลบrow+ลบข้อมูลในfirebase
         var row = this.parentNode.parentNode;
         row.parentNode.removeChild(row);
     }
@@ -431,6 +471,7 @@ async function addnewiteminit(word, meaning,docid){
     row.appendChild(buttonbox);
 }   
 
-genMySet();
+// genMySet();
 
 window.addnewitem = addnewitem;
+window.login = login;
