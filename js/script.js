@@ -37,8 +37,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js";
 
 
-const db = getFirestore();  
-// const db = firebase.firestore();
+const db = getFirestore();
 const flashcards = collection(db, 'flashcards');
 
 //----------------------------------------------Login--------------------------------------------------------------------------
@@ -63,7 +62,7 @@ async function login(){
         div.parentNode.removeChild(div);
         genMySet(user);
     }else if(x > -1){
-        // inform.innerText = "Wrong Password";
+        inform.innerText = "Wrong Password";
         document.getElementById('userid').value = "";
         document.getElementById('userpassword').value = "";
     }else {
@@ -90,7 +89,6 @@ async function genMySet(user){
         eval(`id = Instance.id`+i);
         eval(`userr = Instance.user`+i)
         if(user.normalize()===userr.normalize())genSet(name,id);
-        // document.getElementById(`container`).appendChild(genSet(name,id));
     }
     let div  = document.createElement(`div`);div.className = "addblock";div.id = "newblock";
     let text = document.createElement(`p`);text.className = "textInTextBox";text.innerText = "NEW SET";
@@ -317,8 +315,6 @@ async function practiceDone() {
 }
 //----------------------------------------------Table-------------------------------------------------------------------------
 
-// export var check = [];
-
 async function gentable(setid){
     let tables = document.getElementById("content");
     let head = document.createElement("thead");head.id = "newcontenthead";
@@ -381,12 +377,10 @@ async function deleteItem(setid,value) {
         let Instance = await getDoc(wordset);
         Instance = Instance.data();
         let i = 0;
-        // console.log(value);
         let x;
         let b = 1;
         while(b){
             eval(`x = Instance.word`+i+`+Instance.meaning`+i);
-            // console.log(x);
             eval(`if(x.normalize()===value.normalize())b=0;`);
             i++;
             if(i >= Instance.length){i = Instance.length;b=0;}
@@ -429,7 +423,7 @@ async function addnewitem(setid){
     deletebutton.value=textinput1.value+textinput2.value;//เป็น docid 
     
     deletebutton.onclick=function(){
-        deleteItem(setid,deletebutton.value);//{//ตรงนี้เป็นฟังก์ชั่นลบrow+ลบข้อมูลในfirebase
+        deleteItem(setid,deletebutton.value);
         var row = this.parentNode.parentNode;
         row.parentNode.removeChild(row);
     }
@@ -458,7 +452,7 @@ async function addnewiteminit(setid,word, meaning,docid){
     deletebutton.value=word+meaning;
     buttonbox.value = setid;
     deletebutton.onclick=function(){
-        deleteItem(buttonbox.value,deletebutton.value);//{//ตรงนี้เป็นฟังก์ชั่นลบrow+ลบข้อมูลในfirebase
+        deleteItem(buttonbox.value,deletebutton.value);
         var row = this.parentNode.parentNode;
         row.parentNode.removeChild(row);
     }
@@ -471,7 +465,4 @@ async function addnewiteminit(setid,word, meaning,docid){
     row.appendChild(buttonbox);
 }   
 
-// genMySet();
-
-window.addnewitem = addnewitem;
 window.login = login;
