@@ -178,7 +178,7 @@ async function deleteSet(setid){
     let topic = document.createElement("h2");topic.innerText = "";topic.id = "topic";
     document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
     changeState();
-    
+
     const setList = await doc(db,`flashcards/LPGlXHRwJIOvjp3zg0sL`);
     let Instance = await getDoc(setList);
     Instance = Instance.data();
@@ -192,13 +192,14 @@ async function deleteSet(setid){
     await updateDoc(setList,{
         count : Instance.count - 1
     })
-    i++;l--;
+    l--;
     while(k<l){
         i++;
         // console.log(i);
         eval(`updateDoc(setList,{
             name`+k+` : Instance.name`+i+`,
-            id`+k+` : Instance.id`+i+`
+            id`+k+` : Instance.id`+i+`,
+            user`+k+` : Instance.user`+i+`
         })`);
         k++;
     }
