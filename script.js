@@ -366,31 +366,6 @@ async function genPracticeSection(setid){
 }
 
 //-------------------------------------Learning & Practice onCLick function----------------------------------------------------
-/*//when click learning button in particular set on My Set
-async function showLearning(setid){
-    const wordset = await doc(db,`flashcards/${setid}`);
-    let Instance = await getDoc(wordset).docs;
-
-    if (Instance.length > 0) {
-        let word = Instance.word[0];
-        let meaning = Instance.meaning[0];
-        document.getElementById("learning-vocab").value = word;
-        document.getElementsById("learning-meaning").value = meaning;
-    }
-}
-
-//when click practice button in particular set on My Set
-async function showPractice(setid){
-    const wordset = await doc(db,`flashcards/${setid}`);
-    let Instance = await getDoc(wordset).docs;
-
-    if (Instance.length > 0) {
-        let word = Instance.word[0];
-        document.getElementById("practice-question").value = word;
-        document.getElementsById("learning-meaning").value = meaning;
-    }
-}*/
-
 //when click next item button in learning section
 async function nextItem(setid, index){
     const wordSetRef = await doc(db,`flashcards/` + setid);
@@ -407,7 +382,7 @@ async function nextItem(setid, index){
     document.getElementById("learning-number").value = nextIndex;
     document.getElementById("learning-number").innerText = eval(`nextIndex + 1` + `/` + `setLength`);
     document.getElementById("learning-vocab").innerText = word;
-    document.getElementsById("learning-meaning").innerText = meaning;
+    document.getElementById("learning-meaning").innerText = meaning;
 }
 
 //when click previous item button in learning section
@@ -426,7 +401,7 @@ async function prevItem(setid, index){
     document.getElementById("learning-number").value = prevIndex;
     document.getElementById("learning-number").innerText = eval(`prevIndex + 1` + `/` + `setLength`);
     document.getElementById("learning-vocab").innerText = word;
-    document.getElementsById("learning-meaning").innerText = meaning;
+    document.getElementById("learning-meaning").innerText = meaning;
 }
 
 //when click enter to check answer in practice section
@@ -435,34 +410,37 @@ async function checkAnswer(setid, index){
     let Instance = await getDoc(wordSetRef);
     Instance = Instance.data();
 
-    let correctAnswer = Instance.meaning[index];
+    let correctAnswer = eval(`Instance.meaning`+`index`);
     let userAnswer = document.getElementById("practice-answer").value;
-    if (userAnswer === correctAnser) {
-        let score_correct = document.getElementById("score-correct").value;
+    if (userAnswer.normalize() === correctAnser.normalize()) {
+        let score_correct = document.getElementById("score-correct").innerHTML;
         let new_score = parseInt(score_correct) + 1;
-        document.getElementById("score-correct").value = new_score.toString();
+        document.getElementById("score-correct").innerHTML = new_score.toString();
     }
     else {
-        let score_incorrect = document.getElementById("score-incorrect").value;
+        let score_incorrect = document.getElementById("score-incorrect").innerHTML;
         let new_score = parseInt(score_incorrect) + 1;
-        document.getElementById("score-incorrect").value = new_score.toString();
+        document.getElementById("score-incorrect").innerHTML = new_score.toString();
     }
     nextQuestion(setid, index);
 }
 
 //invoked automatically after checkAnswer function done
 async function nextQuestion(setid, index){
-    const wordset = await doc(db,`flashcards/${setid}`);
-    let Instance = await getDoc(wordset).docs;
+    const wordSetRef = await doc(db,`flashcards/` + setid);
+    let Instance = await getDoc(wordSetRef);
+    Instance = Instance.data();
+    const setLength = Instance.length;
 
     let nextIndex = index + 1;
-    if (nextIndex === Instance.length) {
+    if (nextIndex === setLength) {
         practiceDone();
     }
 
-    let word = Instance.word[nextIndex];
-    document.getElementById("practice-number").value = nextIndex + 1;
-    document.getElementById("practice-question").value = word;
+    let word = eval(`Instance.word`+`nextIndex`);
+    document.getElementById("practice-number").value = nextIndex;
+    document.getElementById("practice-number").innerText = eval(`nextIndex + 1` + `/` + `setLength`);
+    document.getElementById("practice-question").innerText = eval(`Instance.word`+`nextIndex`);
     document.getElementById("practice-answer").value = "";
 }
 
