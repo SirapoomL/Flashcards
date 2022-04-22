@@ -62,7 +62,7 @@ async function login(){
         div.parentNode.removeChild(div);
         genMySet(user);
     }else if(x > -1){
-        inform.innerText = "Wrong Password";
+        inform.innerText = "Wrong username or password";
         document.getElementById('userid').value = "";
         document.getElementById('userpassword').value = "";
     }else {
