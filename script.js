@@ -162,8 +162,10 @@ async function createSet(user){
     let text = document.createElement(`p`);text.className = "textInTextBox";text.innerText = document.getElementById(`nameofset`).value;
     let learning = document.createElement(`button`);learning.className = "learningSet";
     learning.id = "learningSet";learning.innerText = "Learning";learning.value = docRef.id;
+    learning.onclick=function(){genLearningSection(learning.value);};
     let practice = document.createElement(`button`);practice.className = "practiceSet";
     practice.id = "practiceSet";practice.innerText = "Practice";practice.value = docRef.id;
+    practice.onclick=function(){genPracticeSection(practice.value);};
     div.appendChild(del);
     div.appendChild(edit);
     div.appendChild(text);
@@ -355,6 +357,7 @@ async function genPracticeSection(setid){
 
     let enterBtn = document.createElement(`button`);
     enterBtn.className = "btn-enter";
+    enterBtn.innerText = "Enter";   
     enterBtn.onclick = function() {checkAnswer(setid, number.value);}
     
     div.appendChild(name);
@@ -415,7 +418,7 @@ async function checkAnswer(setid, index){
 
     let correctAnswer = eval(`Instance.meaning${index}`);
     let userAnswer = document.getElementById("practice-answer").value;
-    if (userAnswer.normalize() === correctAnser.normalize()) {
+    if (userAnswer.normalize() === correctAnswer.normalize()) {
         let score_correct = document.getElementById("score-correct").innerHTML;
         let new_score = parseInt(score_correct) + 1;
         document.getElementById("score-correct").innerHTML = new_score.toString();
