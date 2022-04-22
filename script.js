@@ -414,7 +414,13 @@ async function prevItem(setid, index){
 }
 
 //when click enter to check answer in practice section
-async function checkAnswer(setid, index){
+function checkAnswer(setid, index){
+    calculateScore(setid, index);
+    nextQuestion(setid, index);
+}
+
+//checkAnswer function automatically call this function immediately
+async function calculateScore(setid, index){
     const wordSetRef = await doc(db,`flashcards/` + setid);
     let Instance = await getDoc(wordSetRef);
     Instance = Instance.data();
@@ -431,7 +437,6 @@ async function checkAnswer(setid, index){
         let new_score = parseInt(score_incorrect) + 1;
         document.getElementById("score-incorrect").innerHTML = new_score.toString();
     }
-    nextQuestion(setid, index);
 }
 
 //invoked automatically after checkAnswer function done
