@@ -6,8 +6,15 @@ tmp/
 *.swp
 *~.nib
 
+.github
+public/
+.firebaserc
+.firebase/
+*firebase.json
+
 .classpath
 
+.firebase.json
 
 local.properties
 .settings/
