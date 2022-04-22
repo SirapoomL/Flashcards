@@ -357,6 +357,7 @@ async function genPracticeSection(setid){
 
     let enterBtn = document.createElement(`button`);
     enterBtn.className = "btn-enter";
+    enterBtn.id = "btn-enter";
     enterBtn.innerText = "Enter";   
     enterBtn.onclick = function() {checkAnswer(setid, number.value);}
     
@@ -440,19 +441,25 @@ async function nextQuestion(setid, index){
 
     let nextIndex = index + 1;
     if (nextIndex === setLength) {
-        practiceDone();
+        practiceDone(setLength);
     }
-
-    let word = eval(`Instance.word`+`nextIndex`);
-    document.getElementById("practice-number").value = nextIndex;
-    document.getElementById("practice-number").innerText = `${nextIndex + 1}/${setLength}`;
-    document.getElementById("practice-question").innerText = eval(`Instance.word${nextIndex}`);
-    document.getElementById("practice-answer").value = "";
+    else {
+        let word = eval(`Instance.word`+`nextIndex`);
+        document.getElementById("practice-number").value = nextIndex;
+        document.getElementById("practice-number").innerText = `${nextIndex + 1}/${setLength}`;
+        document.getElementById("practice-question").innerText = eval(`Instance.word${nextIndex}`);
+        document.getElementById("practice-answer").value = "";
+    }
 }
 
 //invoked when practice set last item is done
-async function practiceDone() {
-    
+async function practiceDone(fullscore) {
+    let button = document.getElementById("btn-enter")
+    button.parentNode.removeChild(button);
+    let score = document.createElement("p");
+    score.innerText = document.getElementById("score-correct").innerHTML + ' / ' + fullscore.toString();
+    document.getElementById("practice-question").innerText = "Your Score";
+    document.getElementById("practice-answer").parentNode.replaceChild(score,document.getElementById("practice-answer"));
 }
 //----------------------------------------------Table-------------------------------------------------------------------------
 
