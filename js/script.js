@@ -229,6 +229,10 @@ async function genLearningSection(setid){
     const setLength = Instance.length;
     const index = 0;
     
+    let outerDiv = document.createElement(`div`);
+    outerDiv.className = "learning";
+    outerDiv.id = "learning";
+
     let div  = document.createElement(`div`);
     div.className = "board";
     div.id = "learning-card";
@@ -268,7 +272,8 @@ async function genLearningSection(setid){
     div.appendChild(meaning);
     div.appendChild(prevBut);
     div.appendChild(nextBut);
-    document.getElementById(`learning`).appendChild(div);
+    outerDiv.appendChild(div);
+    document.getElementById(`topicbody`).appendChild(outerDiv);
 }
 
 async function genPracticeSection(setid){
@@ -277,6 +282,10 @@ async function genPracticeSection(setid){
     Instance = Instance.data();
     const setLength = Instance.length;
     const index = 0;
+
+    let outerDiv = document.createElement(`div`);
+    outerDiv.className = "practicing";
+    outerDiv.id = "practice";
     
     let div  = document.createElement(`div`);
     div.className = "board";
@@ -326,7 +335,7 @@ async function genPracticeSection(setid){
 
     let enterBtn = document.createElement(`button`);
     enterBtn.className = "btn-enter";
-    enterBtn.onclick = function() {checkAnser(setid, number.value);}
+    enterBtn.onclick = function() {checkAnswer(setid, number.value);}
     
     div.appendChild(name);
     div.appendChild(number);
@@ -335,7 +344,8 @@ async function genPracticeSection(setid){
     div.appendChild(question);
     div.appendChild(answerBox);
     div.appendChild(enterBtn);
-    document.getElementById(`practice`).appendChild(div);
+    outerDiv.appendChild(div);
+    document.getElementById(`topicbody`).appendChild(outerDiv);
 }
 
 //-------------------------------------Learning & Practice onCLick function----------------------------------------------------
@@ -403,12 +413,12 @@ async function prevItem(setid, index){
 }
 
 //when click enter to check answer in practice section
-async function checkAnser(setid, index){
+async function checkAnswer(setid, index){
     const wordSetRef = await doc(db,`flashcards/` + setid);
     let Instance = await getDoc(wordSetRef);
     Instance = Instance.data();
 
-    let correctAnser = Instance.meaning[index];
+    let correctAnswer = Instance.meaning[index];
     let userAnswer = document.getElementById("practice-answer").value;
     if (userAnswer === correctAnser) {
         let score_correct = document.getElementById("score-correct").value;
