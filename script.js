@@ -345,7 +345,7 @@ async function genPracticeSection(setid){
     let question = document.createElement(`p`);
     question.className = "question";
     question.id = "practice-question";
-    question.innerText = eval(`Instance.meaning${index}`);
+    question.innerText = eval(`Instance.word${index}`);
 
     let answerBox = document.createElement(`input`);
     answerBox.className = "ans";
