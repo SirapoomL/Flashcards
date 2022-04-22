@@ -176,7 +176,7 @@ async function createSet(user){
     gentable(docRef.id);
 }
 
-async function deleteSet(setid){
+function deleteSet(setid){
     let topic = document.createElement("h2");topic.innerText = "";topic.id = "topic";
     document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
     changeState();
