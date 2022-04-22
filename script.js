@@ -162,8 +162,10 @@ async function createSet(user){
     let text = document.createElement(`p`);text.className = "textInTextBox";text.innerText = document.getElementById(`nameofset`).value;
     let learning = document.createElement(`button`);learning.className = "learningSet";
     learning.id = "learningSet";learning.innerText = "Learning";learning.value = docRef.id;
+    learning.onclick=function(){genLearningSection(learning.value);};
     let practice = document.createElement(`button`);practice.className = "practiceSet";
     practice.id = "practiceSet";practice.innerText = "Practice";practice.value = docRef.id;
+    practice.onclick=function(){genPracticeSection(practice.value);};
     div.appendChild(del);
     div.appendChild(edit);
     div.appendChild(text);
