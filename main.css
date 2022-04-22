@@ -43,7 +43,7 @@ h2{
   /*go back to edit - it didn't have color*/
   margin-top: 1rem;
   margin-left: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   padding: 1 rem;  
 }
 
@@ -102,6 +102,7 @@ h2{
 .editSet:hover{
   opacity: 0.7;
 }
+
 /*learning button in every block*/
 .learningSet{
   box-shadow: 3px 3px 3px -1px var(--cyan);
@@ -142,6 +143,12 @@ h2{
   box-shadow: 3px 3px 3px -1px var(--orange);
   background-color: var(--yellow);
   color: var(--black);
+}
+.show-score{
+  text-align: center;
+  font-size: 800%;
+  position: relative;
+  transform: translate(0%,25%);
 }
 
 

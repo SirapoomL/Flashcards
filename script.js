@@ -326,6 +326,7 @@ async function genPracticeSection(setid){
     correct.className = "correct";
     let correct_img = document.createElement(`img`);
     correct_img.className = "correct-img";
+    correct_img.id = "correct-img";
     correct_img.src = "/resource/correct.png"; correct_img.alt = "";
     let correct_score = document.createElement(`span`);
     correct_score.id = "score-correct";
@@ -337,6 +338,7 @@ async function genPracticeSection(setid){
     incorrect.className = "incorrect";
     let incorrect_img = document.createElement(`img`);
     incorrect_img.className = "incorrect-img";
+    incorrect_img.id = "incorrect-img";
     incorrect_img.src = "/resource/incorrect.png"; correct_img.alt = "";
     let incorrect_score = document.createElement(`span`);
     incorrect_score.id = "score-incorrect";
@@ -457,12 +459,19 @@ async function practiceDone(fullscore) {
     let button = document.getElementById("btn-enter");
     button.parentNode.removeChild(button);
     let score = document.createElement("p");
+    score.className =  "show-score";
     score.innerText = document.getElementById("score-correct").innerHTML + ' / ' + fullscore.toString();
     document.getElementById("practice-question").innerText = "Your Score";
     document.getElementById("practice-answer").parentNode.replaceChild(score,document.getElementById("practice-answer"));
+    let cr = document.getElementById("score-correct").parentNode;
+    document.getElementById("score-correct").innerText="   ";
+    cr.removeChild(document.getElementById("correct-img"));
+    let incr = document.getElementById("score-incorrect").parentNode;
+    document.getElementById("score-incorrect").innerText="  ";
+    incr.removeChild(document.getElementById("incorrect-img"));
 }
-//----------------------------------------------Table-------------------------------------------------------------------------
 
+//----------------------------------------------Table-------------------------------------------------------------------------
 async function gentable(setid){
     let tables = document.getElementById("content");
     let head = document.createElement("thead");head.id = "newcontenthead";
