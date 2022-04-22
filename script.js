@@ -132,13 +132,11 @@ async function genSet(name,id){
 }
 
 async function createSet(user){
-    let tables = document.getElementById("content");
-    tables.deleteTHead();
-    const x = tables.rows.length;
-    for(let i = 0;i < x;i++){
-        tables.deleteRow(0);
-    }
+    changeState();
+    let topic = document.createElement("h2");topic.innerText = "Vocabulary";topic.id = "topic";
+    document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
     const l = 0;
+
     const docRef = await addDoc(collection(db, "flashcards"), {
         name: document.getElementById(`nameofset`).value,
         length : l
@@ -179,12 +177,8 @@ async function createSet(user){
 async function deleteSet(setid){
     let topic = document.createElement("h2");topic.innerText = "";topic.id = "topic";
     document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
-    let tables = document.getElementById("content");
-    tables.deleteTHead();
-    const x = tables.rows.length;
-    for(let i = 0;i < x;i++){
-        tables.deleteRow(0);
-    }
+    changeState();
+    
     const setList = await doc(db,`flashcards/LPGlXHRwJIOvjp3zg0sL`);
     let Instance = await getDoc(setList);
     Instance = Instance.data();
@@ -211,18 +205,37 @@ async function deleteSet(setid){
 }
 
 async function editSet(setid){
-    let tables = document.getElementById("content");
+    changeState();
     let topic = document.createElement("h2");topic.innerText = "Vocabulary";topic.id = "topic";
+    document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
+    gentable(setid);
+}
+
+async function changeState(){
+    let tables = document.getElementById("content");
+    let topic = document.createElement("h2");topic.innerText = "";topic.id = "topic";
+
+    if(document.getElementById(`practice`)){
+        document.getElementById(`practice`).parentNode.removeChild(document.getElementById(`practice`));
+    }
+
+    if(document.getElementById(`learning`)){
+        document.getElementById(`learning`).parentNode.removeChild(document.getElementById(`learning`));
+    }
+
     document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
     tables.deleteTHead();
     const x = tables.rows.length;
     for(let i = 0;i < x;i++){
         tables.deleteRow(0);
     }
-    gentable(setid);
 }
 //---------------------------------------Generate Learning & Practice HTML-----------------------------------------------------
 async function genLearningSection(setid){
+    changeState();
+    let topic = document.createElement("h2");topic.innerText = "Learning";topic.id = "topic";
+    document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
+
     const wordSetRef = await doc(db,`flashcards/` + setid);
     let Instance = await getDoc(wordSetRef);
     Instance = Instance.data();
@@ -277,6 +290,10 @@ async function genLearningSection(setid){
 }
 
 async function genPracticeSection(setid){
+    changeState();
+    let topic = document.createElement("h2");topic.innerText = "Practice";topic.id = "topic";
+    document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
+
     const wordSetRef = await doc(db,`flashcards/` + setid);
     let Instance = await getDoc(wordSetRef);
     Instance = Instance.data();
