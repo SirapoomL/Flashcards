@@ -44,8 +44,8 @@ const flashcards = collection(db, 'flashcards');
 
 async function login(){
     let div = document.getElementById('logincontainer');
-    let user = document.getElementById('userid');user = user.value;
-    let password = document.getElementById('userpassword');password = password.value;
+    let user = document.getElementById('userid').value;
+    let password = document.getElementById('userpassword').value;
     let inform = document.getElementById('inform');
     let x = -1;
     const idList = await doc(db,`flashcards/sWRPc6e8xIsEOwDx1thr`);
@@ -113,10 +113,15 @@ async function genSet(name,id){
     let edit = document.createElement(`button`);edit.className = "editSet";del.id = "editSet";
     edit.value = id;edit.onclick = function(){editSet(edit.value);};
     let text = document.createElement(`p`);text.className = "textInTextBox";text.innerText = name;
+    
     let learning = document.createElement(`button`);learning.className = "learningSet";
     learning.id = "learningSet";learning.innerText = "Learning";learning.value = id;
+    learning.onclick=function(){genLearningSection(learning.value);};
+
     let practice = document.createElement(`button`);practice.className = "practiceSet";
     practice.id = "practiceSet";practice.innerText = "Practice";practice.value = id;
+    practice.onclick=function(){genPracticeSection(practice.value);};
+
     div.appendChild(del);
     div.appendChild(edit);
     div.appendChild(text);
@@ -216,8 +221,125 @@ async function editSet(setid){
     }
     gentable(setid);
 }
-//----------------------------------------------Learning & Practice------------------------------------------------------------
-//when click learning button in particular set on My Set
+//---------------------------------------Generate Learning & Practice HTML-----------------------------------------------------
+async function genLearningSection(setid){
+    const wordSetRef = await doc(db,`flashcards/` + setid);
+    let Instance = await getDoc(wordSetRef);
+    Instance = Instance.data();
+    const setLength = Instance.length;
+    const index = 0;
+    
+    let div  = document.createElement(`div`);
+    div.className = "board";
+    div.id = "learning-card";
+
+    let name = document.createElement(`p`);
+    name.className = "name";
+    name.id = "learning-set-name";
+    name.innerText = Instance.name;
+
+    let number = document.createElement(`p`);
+    number.className = "number";
+    number.id = "learning-number";
+    number.value = index;
+    number.innerText = eval(`index + 1` + `/` + `setLength`);
+
+    let vocab = document.createElement(`p`);
+    vocab.className = "vocab";
+    vocab.id = "learning-vocab";
+    vocab.innerText = eval(`Instance.word`+`index`);
+
+    let meaning = document.createElement(`p`);
+    meaning.className = "mean";
+    meaning.id = "learning-meaning";
+    meaning.innerText = eval(`Instance.meaning`+`index`);
+
+    let prevBut = document.createElement(`button`);
+    prevBut.className = "previous";
+    prevBut.onclick = function() {prevItem(setid, number.value);}
+    
+    let nextBut = document.createElement(`button`);
+    nextBut.className = "next";
+    nextBut.onclick = function() {nextItem(setid, number.value);}
+
+    div.appendChild(name);
+    div.appendChild(number);
+    div.appendChild(vocab);
+    div.appendChild(meaning);
+    div.appendChild(prevBut);
+    div.appendChild(nextBut);
+    document.getElementById(`learning`).appendChild(div);
+}
+
+async function genPracticeSection(setid){
+    const wordSetRef = await doc(db,`flashcards/` + setid);
+    let Instance = await getDoc(wordSetRef);
+    Instance = Instance.data();
+    const setLength = Instance.length;
+    const index = 0;
+    
+    let div  = document.createElement(`div`);
+    div.className = "board";
+    div.id = "practice-card";
+
+    let name = document.createElement(`p`);
+    name.className = "name";
+    name.id = "practice-set-name";
+    name.innerText = Instance.name;
+
+    let number = document.createElement(`p`);
+    number.className = "number";
+    number.id = "practice-number";
+    number.value = index;
+    number.innerText = eval(`index + 1` + `/` + `setLength`);
+
+    let correct = document.createElement(`p`);
+    let correct_img = document.createElement(`img`);
+    correct_img.className = "correct-img";
+    correct_img.src = "/resource/correct.png"; correct_img.alt = "";
+    let correct_score = document.createElement(`span`);
+    correct_score.id = "score-correct";
+    correct_score.innerHTML = 0;
+    correct.appendChild(correct_img);
+    correct.appendChild(correct_score);
+
+    let incorrect = document.createElement(`p`);
+    let incorrect_img = document.createElement(`img`);
+    incorrect_img.className = "incorrect-img";
+    incorrect_img.src = "/resource/incorrect.png"; correct_img.alt = "";
+    let incorrect_score = document.createElement(`span`);
+    incorrect_score.id = "score-incorrect";
+    incorrect_score.innerHTML = 0;
+    incorrect.appendChild(incorrect_img);
+    incorrect.appendChild(incorrect_score);
+
+    let question = document.createElement(`p`);
+    question.className = "question";
+    question.id = "practice-question";
+    question.innerText = eval(`Instance.word`+`index`);
+
+    let answerBox = document.createElement(`input`);
+    answerBox.className = "ans";
+    answerBox.type = "text";
+    answerBox.id = "practice-answer";
+    answerBox.placeholder = "Type here ...";
+
+    let enterBtn = document.createElement(`button`);
+    enterBtn.className = "btn-enter";
+    enterBtn.onclick = function() {checkAnser(setid, number.value);}
+    
+    div.appendChild(name);
+    div.appendChild(number);
+    div.appendChild(correct);
+    div.appendChild(incorrect);
+    div.appendChild(question);
+    div.appendChild(answerBox);
+    div.appendChild(enterBtn);
+    document.getElementById(`practice`).appendChild(div);
+}
+
+//-------------------------------------Learning & Practice onCLick function----------------------------------------------------
+/*//when click learning button in particular set on My Set
 async function showLearning(setid){
     const wordset = await doc(db,`flashcards/${setid}`);
     let Instance = await getDoc(wordset).docs;
@@ -240,44 +362,51 @@ async function showPractice(setid){
         document.getElementById("practice-question").value = word;
         document.getElementsById("learning-meaning").value = meaning;
     }
-}
+}*/
 
 //when click next item button in learning section
 async function nextItem(setid, index){
-    const wordset = await doc(db,`flashcards/${setid}`);
-    let Instance = await getDoc(wordset).docs;
+    const wordSetRef = await doc(db,`flashcards/` + setid);
+    let Instance = await getDoc(wordSetRef);
+    Instance = Instance.data();
+    const setLength = Instance.length;
 
     let nextIndex = index + 1;
-    if (nextIndex === Instance.length) {
+    if (nextIndex === setLength) {
         nextIndex = 0;
     }
-    let word = Instance.word[nextIndex];
-    let meaning = Instance.meaning[nextIndex];
-    document.getElementById("learning-number").value = nextIndex + 1;
-    document.getElementById("learning-vocab").value = word;
-    document.getElementsById("learning-meaning").value = meaning;
+    let word = eval(`Instance.word`+`nextIndex`);
+    let meaning = eval(`Instance.meaning`+`nextIndex`);
+    document.getElementById("learning-number").value = nextIndex;
+    document.getElementById("learning-number").innerText = eval(`nextIndex + 1` + `/` + `setLength`);
+    document.getElementById("learning-vocab").innerText = word;
+    document.getElementsById("learning-meaning").innerText = meaning;
 }
 
 //when click previous item button in learning section
 async function prevItem(setid, index){
-    const wordset = await doc(db,`flashcards/${setid}`);
-    let Instance = await getDoc(wordset).docs;
+    const wordSetRef = await doc(db,`flashcards/` + setid);
+    let Instance = await getDoc(wordSetRef);
+    Instance = Instance.data();
+    const setLength = Instance.length;
 
     let prevIndex = index - 1;
     if (prevIndex < 0) {
-        prevIndex = Instance.length - 1;
+        prevIndex = setLength - 1;
     }
-    let word = Instance.word[prevIndex];
-    let meaning = Instance.meaning[prevIndex];
-    document.getElementById("learning-number").value = prevIndex + 1;
-    document.getElementById("learning-vocab").value = word;
-    document.getElementsById("learning-meaning").value = meaning;
+    let word = eval(`Instance.word`+`prevtIndex`);
+    let meaning = eval(`Instance.meaning`+`prevIndex`);
+    document.getElementById("learning-number").value = prevIndex;
+    document.getElementById("learning-number").innerText = eval(`prevIndex + 1` + `/` + `setLength`);
+    document.getElementById("learning-vocab").innerText = word;
+    document.getElementsById("learning-meaning").innerText = meaning;
 }
 
 //when click enter to check answer in practice section
 async function checkAnser(setid, index){
-    const wordset = await doc(db,`flashcards/${setid}`);
-    let Instance = await getDoc(wordset).docs;
+    const wordSetRef = await doc(db,`flashcards/` + setid);
+    let Instance = await getDoc(wordSetRef);
+    Instance = Instance.data();
 
     let correctAnser = Instance.meaning[index];
     let userAnswer = document.getElementById("practice-answer").value;
