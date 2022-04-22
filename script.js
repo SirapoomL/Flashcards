@@ -260,7 +260,7 @@ async function genLearningSection(setid){
     number.className = "number";
     number.id = "learning-number";
     number.value = index;
-    number.innerText = eval(`index + 1` + `/` + `setLength`);
+    number.innerText = `${index + 1}/${setLength}`;
 
     let vocab = document.createElement(`p`);
     vocab.className = "vocab";
@@ -318,7 +318,7 @@ async function genPracticeSection(setid){
     number.className = "number";
     number.id = "practice-number";
     number.value = index;
-    number.innerText = eval(`index + 1` + `/` + `setLength`);
+    number.innerText = `${index + 1}/${setLength}`;
 
     let correct = document.createElement(`p`);
     let correct_img = document.createElement(`img`);
@@ -381,7 +381,7 @@ async function nextItem(setid, index){
     let word = eval(`Instance.word`+`nextIndex`);
     let meaning = eval(`Instance.meaning`+`nextIndex`);
     document.getElementById("learning-number").value = nextIndex;
-    document.getElementById("learning-number").innerText = eval(`nextIndex + 1` + `/` + `setLength`);
+    document.getElementById("learning-number").innerText = `${nextIndex + 1}/${setLength}`;
     document.getElementById("learning-vocab").innerText = word;
     document.getElementById("learning-meaning").innerText = meaning;
 }
@@ -400,7 +400,7 @@ async function prevItem(setid, index){
     let word = eval(`Instance.word`+`prevtIndex`);
     let meaning = eval(`Instance.meaning`+`prevIndex`);
     document.getElementById("learning-number").value = prevIndex;
-    document.getElementById("learning-number").innerText = eval(`prevIndex + 1` + `/` + `setLength`);
+    document.getElementById("learning-number").innerText = `${prevIndex + 1}/${setLength}`;
     document.getElementById("learning-vocab").innerText = word;
     document.getElementById("learning-meaning").innerText = meaning;
 }
@@ -440,7 +440,7 @@ async function nextQuestion(setid, index){
 
     let word = eval(`Instance.word`+`nextIndex`);
     document.getElementById("practice-number").value = nextIndex;
-    document.getElementById("practice-number").innerText = eval(`nextIndex + 1` + `/` + `setLength`);
+    document.getElementById("practice-number").innerText = `${nextIndex + 1}/${setLength}`;
     document.getElementById("practice-question").innerText = eval(`Instance.word`+`nextIndex`);
     document.getElementById("practice-answer").value = "";
 }
