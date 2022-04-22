@@ -321,6 +321,7 @@ async function genPracticeSection(setid){
     number.innerText = `${index + 1}/${setLength}`;
 
     let correct = document.createElement(`p`);
+    correct.className = "correct";
     let correct_img = document.createElement(`img`);
     correct_img.className = "correct-img";
     correct_img.src = "/resource/correct.png"; correct_img.alt = "";
@@ -331,6 +332,7 @@ async function genPracticeSection(setid){
     correct.appendChild(correct_score);
 
     let incorrect = document.createElement(`p`);
+    incorrect.className = "incorrect";
     let incorrect_img = document.createElement(`img`);
     incorrect_img.className = "incorrect-img";
     incorrect_img.src = "/resource/incorrect.png"; correct_img.alt = "";
