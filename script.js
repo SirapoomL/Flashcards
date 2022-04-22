@@ -265,12 +265,12 @@ async function genLearningSection(setid){
     let vocab = document.createElement(`p`);
     vocab.className = "vocab";
     vocab.id = "learning-vocab";
-    vocab.innerText = eval(`Instance.word`+`index`);
+    vocab.innerText = eval(`Instance.word${index}`);
 
     let meaning = document.createElement(`p`);
     meaning.className = "mean";
     meaning.id = "learning-meaning";
-    meaning.innerText = eval(`Instance.meaning`+`index`);
+    meaning.innerText = eval(`Instance.meaning${index}`);
 
     let prevBut = document.createElement(`button`);
     prevBut.className = "previous";
@@ -345,7 +345,7 @@ async function genPracticeSection(setid){
     let question = document.createElement(`p`);
     question.className = "question";
     question.id = "practice-question";
-    question.innerText = eval(`Instance.word`+`index`);
+    question.innerText = eval(`Instance.meaning${index}`);
 
     let answerBox = document.createElement(`input`);
     answerBox.className = "ans";
@@ -380,8 +380,8 @@ async function nextItem(setid, index){
     if (nextIndex === setLength) {
         nextIndex = 0;
     }
-    let word = eval(`Instance.word`+`nextIndex`);
-    let meaning = eval(`Instance.meaning`+`nextIndex`);
+    let word = eval(`Instance.word${index}`);
+    let meaning = eval(`Instance.meaning${index}`);
     document.getElementById("learning-number").value = nextIndex;
     document.getElementById("learning-number").innerText = `${nextIndex + 1}/${setLength}`;
     document.getElementById("learning-vocab").innerText = word;
@@ -399,8 +399,8 @@ async function prevItem(setid, index){
     if (prevIndex < 0) {
         prevIndex = setLength - 1;
     }
-    let word = eval(`Instance.word`+`prevtIndex`);
-    let meaning = eval(`Instance.meaning`+`prevIndex`);
+    let word = eval(`Instance.word${index}`);
+    let meaning = eval(`Instance.meaning${index}`);
     document.getElementById("learning-number").value = prevIndex;
     document.getElementById("learning-number").innerText = `${prevIndex + 1}/${setLength}`;
     document.getElementById("learning-vocab").innerText = word;
@@ -413,7 +413,7 @@ async function checkAnswer(setid, index){
     let Instance = await getDoc(wordSetRef);
     Instance = Instance.data();
 
-    let correctAnswer = eval(`Instance.meaning`+`index`);
+    let correctAnswer = eval(`Instance.meaning${index}`);
     let userAnswer = document.getElementById("practice-answer").value;
     if (userAnswer.normalize() === correctAnser.normalize()) {
         let score_correct = document.getElementById("score-correct").innerHTML;
@@ -443,7 +443,7 @@ async function nextQuestion(setid, index){
     let word = eval(`Instance.word`+`nextIndex`);
     document.getElementById("practice-number").value = nextIndex;
     document.getElementById("practice-number").innerText = `${nextIndex + 1}/${setLength}`;
-    document.getElementById("practice-question").innerText = eval(`Instance.word`+`nextIndex`);
+    document.getElementById("practice-question").innerText = eval(`Instance.word${index}`);
     document.getElementById("practice-answer").value = "";
 }
 
