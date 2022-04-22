@@ -446,7 +446,6 @@ async function nextQuestion(setid, index){
         practiceDone(setLength);
     }
     else {
-        let word = eval(`Instance.word`+`nextIndex`);
         document.getElementById("practice-number").value = nextIndex;
         document.getElementById("practice-number").innerText = `${nextIndex + 1}/${setLength}`;
         document.getElementById("practice-question").innerText = eval(`Instance.word${nextIndex}`);
