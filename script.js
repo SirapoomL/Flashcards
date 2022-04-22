@@ -454,7 +454,7 @@ async function nextQuestion(setid, index){
 
 //invoked when practice set last item is done
 async function practiceDone(fullscore) {
-    let button = document.getElementById("btn-enter")
+    let button = document.getElementById("btn-enter");
     button.parentNode.removeChild(button);
     let score = document.createElement("p");
     score.innerText = document.getElementById("score-correct").innerHTML + ' / ' + fullscore.toString();
