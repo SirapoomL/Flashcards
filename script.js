@@ -235,16 +235,21 @@ async function changeState(){
 }
 //---------------------------------------Generate Learning & Practice HTML-----------------------------------------------------
 async function genLearningSection(setid){
-    changeState();
-    let topic = document.createElement("h2");topic.innerText = "Learning";topic.id = "topic";
-    document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
-
     const wordSetRef = await doc(db,`flashcards/` + setid);
     let Instance = await getDoc(wordSetRef);
     Instance = Instance.data();
     const setLength = Instance.length;
     const index = 0;
+
+    changeState();
+    let topic = document.createElement("h2");topic.innerText = "Learning";topic.id = "topic";
+    if(setLength==0){
+        topic.innerText = "No word in the selected set.";topic.style = "color: red;font-size: 20px;font-weight: 400;";
+        document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
+        return;
+    }
     
+    document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
     let outerDiv = document.createElement(`div`);
     outerDiv.className = "learning";
     outerDiv.id = "learning";
@@ -293,16 +298,21 @@ async function genLearningSection(setid){
 }
 
 async function genPracticeSection(setid){
-    changeState();
-    let topic = document.createElement("h2");topic.innerText = "Practice";topic.id = "topic";
-    document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
-
     const wordSetRef = await doc(db,`flashcards/` + setid);
     let Instance = await getDoc(wordSetRef);
     Instance = Instance.data();
     const setLength = Instance.length;
     const index = 0;
 
+    changeState();
+    let topic = document.createElement("h2");topic.innerText = "Practice";topic.id = "topic";
+    if(setLength==0){
+        topic.innerText = "No word in the selected set.";topic.style = "color: red;font-size: 20px;font-weight: 400;";
+        document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
+        return;
+    }
+
+    document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
     let outerDiv = document.createElement(`div`);
     outerDiv.className = "practicing";
     outerDiv.id = "practice";
