@@ -336,17 +336,19 @@ async function genPracticeSection(setid){
     number.value = index;
     number.innerText = `${index + 1}/${setLength}`;
 
-    let correct = document.createElement(`p`);
-    correct.className = "correct";
+    // let correct = document.createElement(`p`);
+    // correct.className = "correct";
     let correct_img = document.createElement(`img`);
     correct_img.className = "correct-img";
     correct_img.id = "correct-img";
     correct_img.src = "/resource/correct.png"; correct_img.alt = "";
     let correct_score = document.createElement(`span`);
     correct_score.id = "score-correct";
+    correct_score.className = "score-correct";
+
     correct_score.innerHTML = 0;
-    correct.appendChild(correct_img);
-    correct.appendChild(correct_score);
+    // correct.appendChild(correct_img);
+    // correct.appendChild(correct_score);
 
     let incorrect = document.createElement(`p`);
     incorrect.className = "incorrect";
@@ -355,10 +357,11 @@ async function genPracticeSection(setid){
     incorrect_img.id = "incorrect-img";
     incorrect_img.src = "/resource/incorrect.png"; correct_img.alt = "";
     let incorrect_score = document.createElement(`span`);
+    incorrect_score.className="score-incorrect";
     incorrect_score.id = "score-incorrect";
     incorrect_score.innerHTML = 0;
-    incorrect.appendChild(incorrect_img);
-    incorrect.appendChild(incorrect_score);
+    // incorrect.appendChild(incorrect_img);
+    // incorrect.appendChild(incorrect_score);
 
     let question = document.createElement(`p`);
     question.className = "question";
@@ -379,8 +382,14 @@ async function genPracticeSection(setid){
     
     div.appendChild(name);
     div.appendChild(number);
-    div.appendChild(correct);
-    div.appendChild(incorrect);
+    
+    div.appendChild(correct_img);
+    div.appendChild(correct_score);
+
+    div.appendChild(incorrect_img);
+    div.appendChild(incorrect_score);
+
+
     div.appendChild(question);
     div.appendChild(answerBox);
     div.appendChild(enterBtn);
