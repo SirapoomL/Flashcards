@@ -47,19 +47,21 @@ async function login(){
     let user = document.getElementById('userid').value;
     let password = document.getElementById('userpassword').value;
     let inform = document.getElementById('inform');
-    let x = -1;
-    const idList = await doc(db,`flashcards/sWRPc6e8xIsEOwDx1thr`);
+    let x = -1;let idd;
+    const idList = await doc(db,`user/alluser`);
     let Instance = await getDoc(idList);
     Instance = Instance.data();
     const len = Instance.len;
     for(let i=0;i<len;i++){
         eval(`  if(Instance.user`+i+`.normalize()===user.normalize()){
-                    x = 0;
-                    if(Instance.password`+i+`.normalize()===password.normalize()){x=1;}
-                };`);
+            x = 0;
+            if(Instance.password`+i+`.normalize()===password.normalize()){x=1;idd = Instance.userid`+i+`;}
+        };`);
     }
+    console.log(x);
     if(x > 0){
         div.parentNode.removeChild(div);
+        document.getElementById(`container`).value = idd;
         genMySet(user);
     }else if(x > -1){
         inform.innerText = "Wrong username or password";
@@ -67,11 +69,16 @@ async function login(){
         document.getElementById('userpassword').value = "";
     }else {
         div.parentNode.removeChild(div);
+        const docRef = await addDoc(collection(db, "user"), {
+            count : 0
+        });
         eval(`updateDoc(idList,{
             user`+len+` : user,
             password`+len+` : password,
+            userid`+len+` : docRef.id,
             len : Instance.len+1
         })`)
+        document.getElementById(`container`).value = docRef.id;
         genMySet(user);
     }
 }
@@ -79,17 +86,16 @@ async function login(){
 //----------------------------------------------My set-------------------------------------------------------------------------
 
 async function genMySet(user){
-    const setList = await doc(db,`flashcards/LPGlXHRwJIOvjp3zg0sL`);
+    const setList = await doc(db,`user/${document.getElementById(`container`).value}`);
     document.getElementById('mysettextbox').innerText = "My Set";
     let Instance = await getDoc(setList);
     Instance = Instance.data();
     const l = Instance.count;
-    let name;let id;let userr;
+    let name;let id;
     for(let i=0;i<l;i++){
         eval(`name = Instance.name`+i);
         eval(`id = Instance.id`+i);
-        eval(`userr = Instance.user`+i)
-        if(user.normalize()===userr.normalize())genSet(name,id);
+        genSet(name,id);
     }
     let div  = document.createElement(`div`);div.className = "addblock";div.id = "newblock";
     let text = document.createElement(`p`);text.className = "textInTextBox";text.innerText = "NEW SET";
@@ -142,14 +148,13 @@ async function createSet(user){
         length : l
     });
   
-    const setList = await doc(db,`flashcards/LPGlXHRwJIOvjp3zg0sL`);
+    const setList = await doc(db,`user/${document.getElementById(`container`).value}`);
     let Instance = await getDoc(setList);
     Instance = Instance.data();
     const len = Instance.count;
     eval(`updateDoc(setList,{
         name`+len+` : document.getElementById("nameofset").value,
         id`+len+` : docRef.id,
-        user`+len+` : user,
         count : Instance.count+1
     })`)
 
@@ -176,12 +181,12 @@ async function createSet(user){
     gentable(docRef.id);
 }
 
-function deleteSet(setid){
+async function deleteSet(setid){
     let topic = document.createElement("h2");topic.innerText = "";topic.id = "topic";
     document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
     changeState();
 
-    const setList = await doc(db,`flashcards/LPGlXHRwJIOvjp3zg0sL`);
+    const setList = await doc(db,`user/${document.getElementById(`container`).value}`);
     let Instance = await getDoc(setList);
     Instance = Instance.data();
     let l = Instance.count;
@@ -201,7 +206,6 @@ function deleteSet(setid){
         eval(`updateDoc(setList,{
             name`+k+` : Instance.name`+i+`,
             id`+k+` : Instance.id`+i+`,
-            user`+k+` : Instance.user`+i+`
         })`);
         k++;
     }
