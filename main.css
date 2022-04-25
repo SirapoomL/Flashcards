@@ -10,14 +10,16 @@
     --cream: #FBDEBD;
     --transition: all 0.5s ease-in-out;
 }
+
 *{
     font-family: 'Mitr',sans-serif;
     padding: 0px;
     margin: 0px;
 }
+
 body {
     background-color: var(--bluewhite);
-  }
+}
 
 /*header*/
 .header {
@@ -46,7 +48,6 @@ h2{
   margin-bottom: 2rem;
   padding: 1 rem;  
 }
-
 
 .container{
   display: flex;
@@ -83,6 +84,7 @@ h2{
   position: relative;
   left: 10px;
 }
+
 .delSet:hover{
   opacity: 0.7;
 }
@@ -99,6 +101,7 @@ h2{
 	height: 25px;
 	background-color: transparent;
 }
+
 .editSet:hover{
   opacity: 0.7;
 }
@@ -124,6 +127,7 @@ h2{
   color: var(--darkblue);
   
 }
+
 /*practice button in every block*/
 .practiceSet{
   box-shadow: 3px 3px 3px -1px var(--yellow);
@@ -168,9 +172,11 @@ h2{
   left: 90px;
   margin: auto;
 }
+
 .btn-add-new-block:hover{
   opacity: 0.7;
 }
+
 /*-------------------------------end of my set part----------------------------------*/
 
 /*-------------------------------start of learning part----------------------------------*/
@@ -192,17 +198,16 @@ h2{
   height: 500px;
   margin: auto;
   position: relative;
-
-  
 }
+
 .name{
   font-size: 20px;
   font-weight: 600;
   position: absolute;
   transform: translate(0, -30%);
   padding: 10px;
-
 }
+
 .number{
   font-size: 20px;
   font-weight: 600;
@@ -210,16 +215,16 @@ h2{
   position: absolute;
   right: 4%;
   transform: translate(0%, -20%); 
-
 }
+
 .learning .vocab{
   font-size: 300%;
   font-weight: 800;
   text-align: center;
   position: relative;
   top: 30%;
-
 }
+
 .learning .mean{
   font-size: 200%;
   font-weight: 300;
@@ -241,9 +246,8 @@ h2{
   position: absolute;
   top: 80%;
   left: 40%;
-
-
 }
+
 .next{
   background-image: url("https://media.discordapp.net/attachments/963438694545621032/965610394393657444/arrow-right.png");
   background-size: cover;
@@ -256,7 +260,6 @@ h2{
   position: absolute;
   top: 80%;
   left: 57%;
-
 }
 /*-------------------------------ending of learning part----------------------------------*/
 
@@ -268,6 +271,7 @@ h2{
   margin-left: 2rem;
   padding: 0.5rem;
 }
+
 .practicing .question{
   font-size: 50px;
   font-weight: 800;
@@ -276,6 +280,7 @@ h2{
   top: 30%;
 
 }
+
 .ans{
   width: 75%;
   height: 40px;
@@ -327,12 +332,12 @@ h2{
   top: 18%;
   right: 13%;
 }
+
 .score-incorrect{
   position: absolute;
   top: 18%;
   right: 5%;
 }
-
 /*-------------------------------ending of practice part----------------------------------*/
 
 /*Vocab part*/
@@ -342,6 +347,7 @@ h2{
   margin-left: 2rem;
   padding: 0.5rem;
 }
+
 #content {
   padding: 0;
   width: 95%;
@@ -352,25 +358,30 @@ h2{
   border-collapse: collapse;
   overflow: hidden;
 }
+
 #content > thead {
   background: var(--darkblue);
   color: white;
 }
+
 #content > thead > tr > th {
   font-weight: lighter;
   text-align: left;
 }
+
 #content td,
 #content th {
   padding: 5px 10px;
   font-weight: lighter;
 }
+
 #word-to-add,
 #meaning-to-add {
   padding: 5px 10px;
   border-radius: 8px;
   border: 1px solid #aaa;
 }
+
 .delete-row,
 #add-newrow {
   border-radius: 8px;
@@ -380,6 +391,7 @@ h2{
   width: 60px;
   cursor: pointer;
 }
+
 .delete-row:hover,
 #add-newrow:hover {
   background: rgb(255, 200, 105);
@@ -399,15 +411,15 @@ h2{
   min-height: 200px;
   margin: auto;
   border-radius: 5%;
-
 }
+
 .username{
   width: 60%;
   text-align: center;
   position: relative;
   left: 20%;
-
 }
+
 .password{
   width: 60%;
   text-align: center;
@@ -415,9 +427,8 @@ h2{
   top: 50%;
   left: 20%;
   transform: translate(0%, 100%);
-
-
 }
+
 .inform{
   font-size: 100%;
   position: relative;
@@ -425,6 +436,7 @@ h2{
   text-align: center;
   color: red;
 }
+
 .btn-login{
   font-size: 15px;
   font-weight: 500;
@@ -443,10 +455,4 @@ h2{
   position: relative;
   left: 35%;
   transform: translate(0%, 130%);
-
-}
-.bth-login:hover{
-  box-shadow: 3px 3px 3px -1px var(--blue);
-  background-color: var(--cyan);
-  color: var(--darkblue);
 }
