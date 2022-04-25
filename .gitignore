@@ -6,6 +6,7 @@ tmp/
 *.swp
 *~.nib
 
+node_modules/
 .github
 public/
 .firebaserc

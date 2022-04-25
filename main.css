@@ -190,35 +190,47 @@ h2{
   max-width: 1000px; 
   height: 500px;
   margin: auto;
+  position: relative;
+  border: 5px solid #FFFF00;
+
   
 }
 .name{
   font-size: 20px;
   font-weight: 600;
   position: absolute;
+
   transform: translate(0, -30%);
   padding: 10px;
+  border: 5px solid #FFFF00;
+
 }
 .number{
   font-size: 20px;
   font-weight: 600;
   text-align: right;
-  position: relative;
-  transform: translate(0%, -20%);
+  position: absolute;
+  right: 4%;
+  transform: translate(0%, -20%); 
+  border: 5px solid #FFFF00;
+
 }
 .learning .vocab{
-  font-size: 50px;
+  font-size: 300%;
   font-weight: 800;
   text-align: center;
   position: relative;
-  top: 20%;
+  top: 30%;
+  border: 5px solid #FFFF00;
+
 }
 .learning .mean{
-  font-size: 40px;
+  font-size: 200%;
   font-weight: 300;
   text-align: center;
   position: relative;
-  top: 20%;
+  top: 30%;
+  border: 5px solid #FFFF00;
 
 }
 
@@ -231,9 +243,10 @@ h2{
 	height: 40px;
 	background-color: transparent;
   margin: auto;
-  position: relative;
-  top: 50%;
+  position: absolute;
+  top: 80%;
   left: 40%;
+  border: 5px solid #FFFF00;
 
 
 }
@@ -246,9 +259,10 @@ h2{
 	height: 40px;
 	background-color: transparent;
   margin: auto;
-  position: relative;
-  top: 50%;
-  left: 50%;
+  position: absolute;
+  top: 80%;
+  left: 57%;
+  border: 5px solid #FFFF00;
 
 }
 /*-------------------------------ending of learning part----------------------------------*/
@@ -267,6 +281,8 @@ h2{
   text-align: center;
   position: relative;
   top: 5%;
+  border: 5px solid #FFFF00;
+
 }
 .ans{
   width: 75%;
@@ -276,6 +292,8 @@ h2{
   position: relative;
   top: 10%;
   left: 12.5%;
+  border: 5px solid #FFFF00;
+
 }
 .btn-enter{
   text-transform: uppercase;
@@ -294,6 +312,8 @@ h2{
   position: relative;
   top: 30%;
   left: 34.75%;
+  border: 5px solid #FFFF00;
+
 }
 .correct{
   position: relative;
@@ -302,6 +322,8 @@ h2{
   transform: translate(0%, 0%);
   font-size: 18px;
   font-weight: 500;
+  border: 5px solid #FFFF00;
+
 }
 .correct-img{
   width: 7%; 
@@ -320,6 +342,8 @@ h2{
   transform: translate(0%, 0%);
   font-size: 18px;
   font-weight: 500;
+  border: 5px solid #FFFF00;
+
  
 }
 .incorrect-img{
@@ -400,6 +424,7 @@ h2{
   min-height: 200px;
   margin: auto;
   border-radius: 5%;
+
 }
 .username{
   width: 60%;
@@ -426,7 +451,6 @@ h2{
   color: red;
 }
 .btn-login{
-
   font-size: 15px;
   font-weight: 500;
   text-align: center;
