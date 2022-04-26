@@ -40,6 +40,7 @@ import {
 const db = getFirestore();
 const flashcards = collection(db, 'flashcards');
 var alertsound = document.getElementById('alert-sound');
+var loginok = document.getElementById('login-ok');
 
 //----------------------------------------------Login--------------------------------------------------------------------------
 
@@ -68,15 +69,17 @@ async function login(){
     }
     console.log(x);
     if(x > 0){
+        loginok.play();
         div.parentNode.removeChild(div);
         document.getElementById(`container`).value = idd;
         genMySet(user);
     }else if(x > -1){
         inform.innerText = "Wrong username or password";
-        alertsound.play();
+        alertsound.play();  
         document.getElementById('userid').value = "";
         document.getElementById('userpassword').value = "";
     }else {
+        loginok.play();
         div.parentNode.removeChild(div);
         const docRef = await addDoc(collection(db, "user"), {
             count : 0
