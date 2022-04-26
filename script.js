@@ -496,8 +496,8 @@ async function prevItem(setid, index){
     if (prevIndex < 0) {
         prevIndex = setLength - 1;
     }
-    let word = eval(`Instance.word${index}`);
-    let meaning = eval(`Instance.meaning${index}`);
+    let word = eval(`Instance.word${prevIndex}`);
+    let meaning = eval(`Instance.meaning${prevIndex}`);
     document.getElementById("learning-number").value = prevIndex;
     document.getElementById("learning-number").innerText = `${prevIndex + 1}/${setLength}`;
     document.getElementById("learning-vocab").innerText = word;
