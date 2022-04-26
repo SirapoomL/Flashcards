@@ -39,6 +39,7 @@ import {
 
 const db = getFirestore();
 const flashcards = collection(db, 'flashcards');
+var alertsound = document.getElementById('alert-sound');
 
 //----------------------------------------------Login--------------------------------------------------------------------------
 
@@ -47,6 +48,7 @@ async function login(){
     let user = document.getElementById('userid').value;
     let password = document.getElementById('userpassword').value;
     if(user.length > 12 || password.length >12){
+        alertsound.play();
         alert('Username and password are limited to 12 characters.');
         document.getElementById('userid').value = "";
         document.getElementById('userpassword').value = "";
@@ -71,6 +73,7 @@ async function login(){
         genMySet(user);
     }else if(x > -1){
         inform.innerText = "Wrong username or password";
+        alertsound.play();
         document.getElementById('userid').value = "";
         document.getElementById('userpassword').value = "";
     }else {
