@@ -60,8 +60,11 @@ h2{
   background-color: var(--white);
   box-shadow: 4px 4px 4px -2px var(--cyan);
   padding: 15px 15px;
-  min-width: 200px; height: 200px
- 
+  min-width: 200px; height: 200px;
+}
+
+#addblock{
+  cursor: move;
 }
 
 .textInTextBox {

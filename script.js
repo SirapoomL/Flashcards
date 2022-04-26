@@ -113,7 +113,7 @@ async function genMySet(user){
 }
 
 async function genSet(name,id){
-    let div  = document.createElement(`div`);div.className = "addblock";div.id = "addblock";
+    let div  = document.createElement(`div`);div.className = "addblock";div.id = "addblock"; div.draggable = "true";
     let del = document.createElement(`button`);del.className = "delSet";del.id = "delSet";
     del.value = id;del.onclick = function(){deleteSet(del.value);edit.parentNode.parentNode.removeChild(edit.parentNode);};
     let edit = document.createElement(`button`);edit.className = "editSet";del.id = "editSet";
@@ -159,7 +159,7 @@ async function createSet(user){
     })`)
 
     
-    let div  = document.createElement(`div`);div.className = "addblock";div.id = "addblock";
+    let div  = document.createElement(`div`);div.className = "addblock";div.id = "addblock";div.draggable = "true";
     let del = document.createElement(`button`);del.className = "delSet";del.id = "delSet";
     del.value = docRef.id;del.onclick = function(){deleteSet(del.value);edit.parentNode.parentNode.removeChild(edit.parentNode);};
     let edit = document.createElement(`button`);edit.className = "editSet";del.id = "editSet";
