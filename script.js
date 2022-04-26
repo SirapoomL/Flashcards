@@ -46,6 +46,12 @@ async function login(){
     let div = document.getElementById('logincontainer');
     let user = document.getElementById('userid').value;
     let password = document.getElementById('userpassword').value;
+    if(user.length > 12 || password.length >12){
+        alert('Username and password are limited to 12 characters.');
+        document.getElementById('userid').value = "";
+        document.getElementById('userpassword').value = "";
+        return;
+    }
     let inform = document.getElementById('inform');
     let x = -1;let idd;
     const idList = await doc(db,`user/alluser`);
@@ -139,6 +145,12 @@ async function genSet(name,id){
 
 async function createSet(user){
     changeState();
+    let x = document.getElementById(`nameofset`).value;
+    if(x.length > 10){
+        alert('The name is limited to 12 characters.');
+        document.getElementById(`nameofset`).value = "";
+        return;
+    }
     let topic = document.createElement("h2");topic.innerText = "Vocabulary";topic.id = "topic";
     document.getElementById("topic").parentNode.replaceChild(topic,document.getElementById("topic"));
     const l = 0;
@@ -592,6 +604,12 @@ async function addnewitem(setid){
     let tables = document.getElementById("content");
     let rowid = document.getElementById("last");
     if(textinput1.value=="" && textinput2.value==""){return}
+    if(textinput1.value.length > 16 || textinput2.value.length > 16){
+        alert("Word and meaning are limited to 16 characters.");
+        textinput1.value=""
+        textinput2.value=""
+        return;
+    }
     await addItem(setid);
     const wordset = await doc(db,`flashcards/${setid}`);
     let Instance = await getDoc(wordset);
