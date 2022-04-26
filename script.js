@@ -477,8 +477,8 @@ async function nextItem(setid, index){
     if (nextIndex === setLength) {
         nextIndex = 0;
     }
-    let word = eval(`Instance.word${index}`);
-    let meaning = eval(`Instance.meaning${index}`);
+    let word = eval(`Instance.word${nextIndex}`);
+    let meaning = eval(`Instance.meaning${nextIndex}`);
     document.getElementById("learning-number").value = nextIndex;
     document.getElementById("learning-number").innerText = `${nextIndex + 1}/${setLength}`;
     document.getElementById("learning-vocab").innerText = word;
