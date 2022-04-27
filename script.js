@@ -123,50 +123,9 @@ async function genMySet(user){
     div.appendChild(button);
     document.getElementById(`container`).appendChild(div);
 }
-
-// document.addEventListener('DOMContentLoaded', (event) => {
-
-//     function handleDragStart(e) {
-//       this.style.opacity = '0.4';
-//     }
-  
-//     function handleDragEnd(e) {
-//       this.style.opacity = '1';
-  
-//       div.forEach(function (div) {
-//         div.classList.remove('over');
-//       });
-//     }
-  
-//     function handleDragOver(e) {
-//       e.preventDefault();
-//       return false;
-//     }
-  
-//     function handleDragEnter(e) {
-//       this.classList.add('over');
-//     }
-  
-//     function handleDragLeave(e) {
-//       this.classList.remove('over');
-//     }
-// });
-// function handleDrop(e) {
-//     e.stopPropagation(); // stops the browser from redirecting.
-//     return false;
-//   }
   
 async function genSet(name,id){
     let div  = document.createElement(`div`);div.className = "addblock";div.id = "addblock"; 
-    // div.draggable = "true";
-    // div.forEach(function(item) {
-    //     div.addEventListener('dragstart', handleDragStart);
-    //     div.addEventListener('dragover', handleDragOver);
-    //     div.addEventListener('dragenter', handleDragEnter);
-    //     div.addEventListener('dragleave', handleDragLeave);
-    //     div.addEventListener('dragend', handleDragEnd);
-    //     div.addEventListener('drop', handleDrop);
-    //   });
     let del = document.createElement(`button`);del.className = "delSet";del.id = "delSet";
     del.value = id;del.onclick = function(){deleteSet(del.value);edit.parentNode.parentNode.removeChild(edit.parentNode);};
     let edit = document.createElement(`button`);edit.className = "editSet";del.id = "editSet";
@@ -186,7 +145,6 @@ async function genSet(name,id){
     div.appendChild(text);
     div.appendChild(learning);
     div.appendChild(practice);
-    // return div;
     document.getElementById(`container`).appendChild(div);
 }
 
@@ -219,15 +177,6 @@ async function createSet(user){
 
     
     let div  = document.createElement(`div`);div.className = "addblock";div.id = "addblock";
-    // div.draggable = "true";
-    // div.forEach(function(item) {
-    //     div.addEventListener('dragstart', handleDragStart);
-    //     div.addEventListener('dragover', handleDragOver);
-    //     div.addEventListener('dragenter', handleDragEnter);
-    //     div.addEventListener('dragleave', handleDragLeave);
-    //     div.addEventListener('dragend', handleDragEnd);
-    //     div.addEventListener('drop', handleDrop);
-    //   });
     let del = document.createElement(`button`);del.className = "delSet";del.id = "delSet";
     del.value = docRef.id;del.onclick = function(){deleteSet(del.value);edit.parentNode.parentNode.removeChild(edit.parentNode);};
     let edit = document.createElement(`button`);edit.className = "editSet";del.id = "editSet";
@@ -270,7 +219,6 @@ async function deleteSet(setid){
     l--;
     while(k<l){
         i++;
-        // console.log(i);
         eval(`updateDoc(setList,{
             name`+k+` : Instance.name`+i+`,
             id`+k+` : Instance.id`+i+`,
