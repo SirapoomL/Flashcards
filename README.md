@@ -1,5 +1,6 @@
 # Flashcards
-This is a single-page web application designed to help students in their online learning journey. The focus of the application is to enhance vocabulary and language learning. The user can access the application through a link. **URL:** https://flashcards-22550.web.app/ 
+This is a single-page web application designed to help students in their online learning journey. The focus of the application is to enhance vocabulary and language learning. This project is an assignment for the 2110221 Computer Engineering Essentials (2021/2) course. <br/> 
+**URL:** https://flashcards-22550.web.app/ 
 
 ## Features
 A list of the key features of your web application, such as the Login system, Home page(My Set), Learning section, Practice section, and Vocabulary table.
